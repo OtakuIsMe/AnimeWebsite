@@ -1,0 +1,127 @@
+#search-detail{
+    height: auto;
+    background-color: black;
+}
+
+#search-detail .search-bar{
+    height: 120px;
+    background-color: rgb(20, 21, 25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#search-detail .search-bar input{
+    background-color: rgba(0,0,0,0);
+    border-left: 0px;
+    border-top: 0px;
+    border-right: 0px ;
+    width: 100%;
+    border-bottom: 2px solid #a0a0a0;
+    font-size: 34px;
+    color: white;
+}
+
+#search-detail .search-bar input:focus {
+    outline: none;
+    border-bottom: 2px solid #f47521;
+}
+
+#search-detail .search-bar .search-input{
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 50%;
+}
+
+#search-detail .search-bar .clear-btn {
+    position: absolute;
+    right: 0;
+}
+
+#search-detail .search-bar .clear-btn svg{
+    color: #a0a0a0;
+    font-size: 28px;
+}
+
+#search-detail .result{
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+    min-height: 370px;
+}
+
+#search-detail .result .no-result{
+    display: flex;
+    align-items: center;
+    width: 60%;
+    border: 1px dashed white ;
+    padding-top: 40px;
+    padding-bottom: 60px;
+    flex-direction: column;
+}
+
+#search-detail .result .no-result img{
+    width: 20%;
+}
+
+#search-detail .result .no-result span{
+    margin-top: 20px;
+    width: 33%;
+    text-align: center;
+    color: #f47521;
+    font-weight: 600;
+}
+
+#search-detail .search-result .title{
+    font-weight: 600;
+    font-size: 18px;
+    color: white;
+}
+
+#search-detail .search-result .anime-container{
+    display: flex;
+    width: 1130px;
+    padding: 20px;
+    flex-wrap: wrap;
+}
+
+#search-detail .search-result .anime-detail{
+    width: 33.33%;
+    padding: 5px 10px;
+    display: flex;
+}
+
+#search-detail .search-result .anime-detail .anime-info{
+    margin-left: 10px;
+    position: relative;
+    width: 250px;
+}
+
+#search-detail .search-result .anime-detail .anime-name{
+    color: white;
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#search-detail .search-result .anime-detail .season-ep{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #a0a0a0;
+}
+
+#search-detail .search-result .anime-detail .sub{
+    position: absolute;
+    bottom: 0px;
+    color: #a0a0a0;
+}
+
+
+
+#search-detail .search-result .anime-detail img{
+    width: 80px;
+    height: 120px;
+}

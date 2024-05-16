@@ -1,0 +1,5 @@
+#anime-container {
+    position: relative;
+    z-index: 2; 
+    margin-top: -190px;
+}
