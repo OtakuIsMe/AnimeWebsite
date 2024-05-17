@@ -1,0 +1,69 @@
+#film-store{
+    min-height: 452px;
+}
+
+
+#film-store .content{
+    width: 1050px;
+    margin: 0 auto;
+}
+
+#film-store .title{
+    display:  flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 60px;
+}
+
+#film-store .title svg{
+    font-size: 32px;
+    color: white;
+}
+
+#film-store .title span{
+    font-size: 30px;
+    font-weight: 600;
+    color: white;
+    margin-left: 5px;
+}
+
+#film-store .content-slider{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+    border-bottom: 2px solid #4a4e58;
+    margin-bottom: 20px;
+}
+
+#film-store .content-slider div{
+    width: 180px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #a0a0a0;
+    font-weight: 600;
+    position: relative;
+    cursor: pointer;
+}
+#film-store .content-slider div:hover{
+    background-color: #141519;
+    color: #fff;
+}
+#film-store .content-slider .selected{
+    color: #fff;
+}
+#film-store .content-slider .selected::after{
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 3px;
+    background-color: #f47521;
+    content: '';
+}
+
+
+
+

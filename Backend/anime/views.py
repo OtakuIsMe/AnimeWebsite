@@ -1,8 +1,9 @@
 from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from .models import Type, Season, AnimeEspisode, Anime, AnimeName, TypeAnime, Showtimes
-from .serializers import TypeSerializer,SeasonSerializer, AnimeEspisodeSerializer, AnimeSerializer, AnimeNameSerializer, TypeAnimeSerializer, ShowtimesSerializer
+from .models import Type, Season, AnimeEspisode, Anime, AnimeName, TypeAnime, Showtimes, FollowAnime
+from users.models import Users
+from .serializers import TypeSerializer,SeasonSerializer, AnimeEspisodeSerializer, AnimeSerializer, AnimeNameSerializer, TypeAnimeSerializer, ShowtimesSerializer, FollowAnimeSerializer
 from images import views as imagesView
 from django.utils import timezone
 from django.db.models import Max
@@ -177,5 +178,36 @@ class filter_anime_by_type(APIView):
         except Exception as e:
             print(f'Error filter anime: {e}')
             return Response({'message': 'Error filter anime'})
+
+class follow_anime(APIView):
+    def post(self, request):
+        try:
+            current_time = timezone.now()
+            anime_id = request.data['anime_id']
+            user_id = request.data['user_id']
+            anime = Anime.objects.get(pk = anime_id)
+            user = Users.objects.get(pk = user_id)
+            FollowAnime.objects.create(animeid = anime, userid = user, datefollow = current_time)
+            return Response({'message' : "Follow successful"})
+        except Exception as e:
+            print(f'Error follow anime:{e}')
+            return Response({'message': 'Error Follow anime'})
+class get_anime_follow_by_user(APIView):
+    def get(self, reqeust, userid):
+        try:
+            user = Users.objects.get(pk = userid)
+            animeFollows = FollowAnime.objects.filter(userid = user)
+            animes_data = []
+            for animeFollow in animeFollows:
+                anime = animeFollow.animeid
+                name = AnimeName.objects.get(animeid = anime, status = 1)
+                anime_data = AnimeSerializer(anime).data
+                anime_data['images'] = imagesView.get_all_image_anime(anime.id)
+                anime_data['name'] = AnimeNameSerializer(name).data['name']
+                animes_data.append(anime_data)
+            return Response(animes_data)
+        except Exception as e:
+            print(f'Error get anime follow:{e}')
+            return Response({'message': 'Error get anime follow'})
         
         

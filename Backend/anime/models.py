@@ -1,4 +1,5 @@
 from django.db import models
+from users.models import Users
 
 # Create your models here.
 class Type(models.Model):
@@ -146,6 +147,14 @@ class AnimeName(models.Model):
         managed = True
         db_table = 'anime_name'
 
+class FollowAnime(models.Model):
+    id = models.BigIntegerField(primary_key=True)
+    userid = models.ForeignKey(Users, models.DO_NOTHING, db_column='userid', blank=True, null=True)
+    animeid = models.ForeignKey(Anime, models.DO_NOTHING, db_column='animeid', blank=True, null=True)
+    datefollow = models.DateField(blank=True, null=True)
 
+    class Meta:
+        managed = True
+        db_table = 'follow_anime'
 
 

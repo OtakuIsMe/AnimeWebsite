@@ -12,6 +12,7 @@ import LoginPage from './pages/LoginPage/LoginPage'
 import SearchPage from './pages/SearchPage/SearchPage'
 import ProfilePage from './pages/ProfilePage/ProfilePage'
 import FilterPage from './pages/FilterPage/FilterPage'
+import FilmStorePage from './pages/FilmStorePage/FilmStorePage'
 
 import { AuthProvider } from './components/Context/AuthContext'
 function App() {
@@ -28,6 +29,7 @@ function App() {
             <Route path='/search' element={<SearchPage />} />
             <Route path='/profile/manage/' element={<ProfilePage />} />
             <Route path='/anime/type' element={<FilterPage/>}/>
+            <Route path='/anime/store/:type' element={<FilmStorePage/>}/>
           </Routes>
         <Footer />
         </Router>

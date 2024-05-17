@@ -91,11 +91,15 @@
     position: absolute;
     bottom: 20px;
     left: 20px;
+    display: flex;
+}
+
+#result-list-anime .hidden-card .action-btn div{
+    margin-right: 20px;
 }
 
 #result-list-anime .hidden-card .action-btn svg{
     font-size: 28px;
-    margin-right: 20px;
     color: #f47521;
     cursor: pointer;
 }

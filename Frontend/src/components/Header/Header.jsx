@@ -124,8 +124,8 @@ export default function Header() {
                     <img src={user?.img.url} alt="" />
                     <div className="user-action-dropdown" style={isUserDropdown? {}: {display:'none'}}>
                         <div className="acc-info block" onClick={()=>{navigate(`/profile/manage`)}}>Account Info</div>
-                        <div className="film-store block">Film Store</div>
-                        <div className="history block">Watching History</div>
+                        <div className="film-store block" onClick={()=>{navigate(`/anime/watchlist`)}}>Watchlist</div>
+                        <div className="history block">History</div>
                         <div className="log-out block">Log Out</div>
                     </div>
                 </div>
