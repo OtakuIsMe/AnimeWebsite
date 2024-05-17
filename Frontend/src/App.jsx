@@ -11,6 +11,8 @@ import WatchingPage from './pages/WatchingPage/WatchingPage'
 import LoginPage from './pages/LoginPage/LoginPage'
 import SearchPage from './pages/SearchPage/SearchPage'
 import ProfilePage from './pages/ProfilePage/ProfilePage'
+import FilterPage from './pages/FilterPage/FilterPage'
+
 import { AuthProvider } from './components/Context/AuthContext'
 function App() {
   return (
@@ -25,6 +27,7 @@ function App() {
             <Route path='/login' element={<LoginPage />} />
             <Route path='/search' element={<SearchPage />} />
             <Route path='/profile/manage/' element={<ProfilePage />} />
+            <Route path='/anime/type' element={<FilterPage/>}/>
           </Routes>
         <Footer />
         </Router>

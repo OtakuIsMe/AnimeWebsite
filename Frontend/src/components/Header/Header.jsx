@@ -32,7 +32,6 @@ export default function Header() {
     useEffect(() => {
         fetchType()
         fetchSeason()
-        console.log(user)
     }, [])
 
     function handleMenuClick(menu) {
@@ -71,7 +70,7 @@ export default function Header() {
                             {typesChunks.map((chunk, index) => (
                                 <Row key={index}>
                                     {chunk.map((type, i) => (
-                                        <Col key={i}>
+                                        <Col key={i} onClick={()=>{navigate(`/anime/type?filter=${type.name}`)}}>
                                             <span>{type.name}</span>
                                         </Col>
                                     ))}

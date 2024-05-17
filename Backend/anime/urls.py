@@ -10,4 +10,5 @@ urlpatterns = [
     path('name/<str:anime_name>',views.get_anime_by_name.as_view(), name= 'get_anime_by_name'),  
     path('espisode/add_video', views.add_anime_espisode_video.as_view(), name= 'add_anime_espisode_video'),
     path('search', views.search_anime.as_view(), name = 'search_name'),
+    path("type", views.filter_anime_by_type.as_view(), name="filter_anime_by_type"),
 ]

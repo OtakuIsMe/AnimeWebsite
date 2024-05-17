@@ -1,0 +1,105 @@
+#result-list-anime .title-result{
+    font-weight: 600;
+    font-size: 18px;
+    color: white;
+    margin: 0;
+}
+
+#result-list-anime .result-cards{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#result-list-anime .anime-card{
+    position: relative;
+    width: 20%;
+    padding: 15px;
+    margin-top: 10px;
+}
+
+#result-list-anime .anime-card img{
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+}
+
+#result-list-anime .hidden-card{
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: none;
+    padding: 20px;
+}
+
+#result-list-anime .anime-card:hover .hidden-card{
+    display: flex;
+    flex-direction: column;
+}
+
+#result-list-anime .anime-card .title{
+    font-weight: 600;
+    color: white;
+    margin-top: 10px;
+    display:  -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#result-list-anime .anime-card .sub{
+    color: #a0a0a0;
+    margin-top: 10px;
+}
+
+#result-list-anime .hidden-card .anime-name, #result-list-anime .hidden-card .description{
+    color: white;
+}
+
+#result-list-anime .hidden-card .anime-name{
+    display:  -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-weight: 700;
+}
+
+#result-list-anime .hidden-card .description{
+    display:  -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 6;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 13px;
+    font-weight: 600;
+}
+#result-list-anime .hidden-card .season, #result-list-anime .hidden-card .episode{
+    color: #a0a0a0;
+    font-size: 14px;
+}
+
+#result-list-anime .hidden-card div{
+    margin-bottom: 5px;
+}
+
+#result-list-anime .hidden-card .action-btn{
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+}
+
+#result-list-anime .hidden-card .action-btn svg{
+    font-size: 28px;
+    margin-right: 20px;
+    color: #f47521;
+    cursor: pointer;
+}
+
+
+
+

@@ -160,5 +160,22 @@ class search_anime(APIView):
         except Exception as e:
             print(f'Error search anime: {e}')
             return Response({'message': 'Error search anime'})
+class filter_anime_by_type(APIView):
+    def get(self, request):
+        try:
+            filter = request.query_params.get('filter')
+            typeAnimes = TypeAnime.objects.filter(typeid = Type.objects.get(name = filter))
+            animes_data = []
+            for typeAnime in typeAnimes:
+                anime = typeAnime.animeid
+                name = AnimeName.objects.get(animeid = anime, status = 1)
+                anime_data = AnimeSerializer(anime).data
+                anime_data['images'] = imagesView.get_all_image_anime(anime.id)
+                anime_data['name'] = AnimeNameSerializer(name).data['name']
+                animes_data.append(anime_data)
+            return Response(animes_data)
+        except Exception as e:
+            print(f'Error filter anime: {e}')
+            return Response({'message': 'Error filter anime'})
         
         

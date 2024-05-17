@@ -1,0 +1,23 @@
+#filter-detail{
+    min-height: 435px;
+}
+
+#filter-detail h2{
+    margin: 0;
+    text-align: center;
+    color: white;
+    padding-bottom: 40px;
+}
+
+#filter-detail .content{
+    width: 1050px;
+    margin: 0 auto;
+}
+
+#filter-detail h4{
+    color: #a0a0a0;
+    margin-top: 20px;
+}
+
+
+
