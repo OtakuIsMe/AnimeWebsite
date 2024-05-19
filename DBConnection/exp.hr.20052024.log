@@ -1,0 +1,66 @@
+;;; 
+Export: Release 19.0.0.0.0 - Production on Mon May 20 02:33:05 2024
+Version 19.3.0.0.0
+
+Copyright (c) 1982, 2019, Oracle and/or its affiliates.  All rights reserved.
+;;; 
+Connected to: Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
+Starting "SYS"."SYS_EXPORT_SCHEMA_01":  "/******** AS SYSDBA" directory=exportDBAnimePage schemas=HR dumpfile=exp.hr.20052024.dmp logfile=exp.hr.20052024.log 
+Processing object type SCHEMA_EXPORT/TABLE/TABLE_DATA
+Processing object type SCHEMA_EXPORT/TABLE/INDEX/STATISTICS/INDEX_STATISTICS
+Processing object type SCHEMA_EXPORT/TABLE/STATISTICS/TABLE_STATISTICS
+Processing object type SCHEMA_EXPORT/STATISTICS/MARKER
+Processing object type SCHEMA_EXPORT/USER
+Processing object type SCHEMA_EXPORT/SYSTEM_GRANT
+Processing object type SCHEMA_EXPORT/ROLE_GRANT
+Processing object type SCHEMA_EXPORT/DEFAULT_ROLE
+Processing object type SCHEMA_EXPORT/TABLESPACE_QUOTA
+Processing object type SCHEMA_EXPORT/PRE_SCHEMA/PROCACT_SCHEMA
+Processing object type SCHEMA_EXPORT/SEQUENCE/SEQUENCE
+Processing object type SCHEMA_EXPORT/TABLE/TABLE
+Processing object type SCHEMA_EXPORT/TABLE/COMMENT
+Processing object type SCHEMA_EXPORT/TABLE/IDENTITY_COLUMN
+Processing object type SCHEMA_EXPORT/TABLE/INDEX/INDEX
+Processing object type SCHEMA_EXPORT/TABLE/CONSTRAINT/CONSTRAINT
+Processing object type SCHEMA_EXPORT/TABLE/CONSTRAINT/REF_CONSTRAINT
+Processing object type SCHEMA_EXPORT/TABLE/TRIGGER
+. . exported "HR"."EXP_SD_730-02_16_59"                  1.230 MB    1925 rows
+. . exported "HR"."EXP_SD_734-02_23_37"                  1.249 MB     918 rows
+. . exported "HR"."ANIME"                                26.52 KB      15 rows
+. . exported "HR"."IMAGES"                               76.04 MB      58 rows
+. . exported "HR"."ANIME_ESPISODE"                       13.23 KB     199 rows
+. . exported "HR"."USERS"                                9.226 KB       2 rows
+. . exported "HR"."COMMENTS"                             8.601 KB       1 rows
+. . exported "HR"."AUTH_PERMISSION"                      8.171 KB      24 rows
+. . exported "HR"."DJANGO_MIGRATIONS"                    7.953 KB      18 rows
+. . exported "HR"."ANIME_NAME"                           7.898 KB      24 rows
+. . exported "HR"."ANIME_CHARACTER"                      6.843 KB      28 rows
+. . exported "HR"."RATING"                               6.828 KB       2 rows
+. . exported "HR"."SHOWTIMES"                            6.648 KB      15 rows
+. . exported "HR"."TYPE_ANIME"                           6.710 KB      61 rows
+. . exported "HR"."SEASON"                               6.445 KB      20 rows
+. . exported "HR"."FOLLOW_ANIME"                         6.421 KB       3 rows
+. . exported "HR"."DJANGO_CONTENT_TYPE"                  6.195 KB       6 rows
+. . exported "HR"."TYPE"                                 6.171 KB      32 rows
+. . exported "HR"."DIRECTOR_ANIME"                       6.140 KB      16 rows
+. . exported "HR"."STUDIO_ANIME"                         6.140 KB      16 rows
+. . exported "HR"."AUTHOR_ANIME"                         6.132 KB      15 rows
+. . exported "HR"."ANIME_SERIES"                         6.062 KB      14 rows
+. . exported "HR"."DIRECTOR"                             6.046 KB      15 rows
+. . exported "HR"."AUTHOR"                               5.937 KB      14 rows
+. . exported "HR"."STUDIO"                               5.773 KB      11 rows
+. . exported "HR"."ROLE"                                 5.546 KB       3 rows
+. . exported "HR"."AUTH_GROUP"                               0 KB       0 rows
+. . exported "HR"."AUTH_GROUP_PERMISSIONS"                   0 KB       0 rows
+. . exported "HR"."AUTH_USER"                                0 KB       0 rows
+. . exported "HR"."AUTH_USER_GROUPS"                         0 KB       0 rows
+. . exported "HR"."AUTH_USER_USER_PERMISSIONS"               0 KB       0 rows
+. . exported "HR"."DJANGO_ADMIN_LOG"                         0 KB       0 rows
+. . exported "HR"."DJANGO_SESSION"                           0 KB       0 rows
+. . exported "HR"."HISTORY_ANIME"                            0 KB       0 rows
+. . exported "HR"."NOTIFICATION"                             0 KB       0 rows
+Master table "SYS"."SYS_EXPORT_SCHEMA_01" successfully loaded/unloaded
+******************************************************************************
+Dump file set for SYS.SYS_EXPORT_SCHEMA_01 is:
+  D:\FPT\ANIMEWEBSITE\DBCONNECTION\EXP.HR.20052024.DMP
+Job "SYS"."SYS_EXPORT_SCHEMA_01" successfully completed at Mon May 20 02:33:31 2024 elapsed 0 00:00:15
