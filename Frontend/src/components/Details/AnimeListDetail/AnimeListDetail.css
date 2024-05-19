@@ -99,6 +99,8 @@
 .slider-name-hidden{
     margin-top: 15px;
     margin-bottom: 10px;
+    font-weight: 600;
+    font-size: 18px;
 }
 .slider-rating-hidden{
     margin-left: 15px;
@@ -110,6 +112,7 @@
     -webkit-line-clamp: 6;
     overflow: hidden;
     text-overflow: ellipsis;
+    text-align: justify;
 }
 .slider-season-hidden, .slider-espisode-hidden{
     margin-left: 15px;

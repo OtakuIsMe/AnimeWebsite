@@ -5,7 +5,11 @@ import { GoTriangleDown } from "react-icons/go";
 import { FaDiamond } from "react-icons/fa6";
 import { IoPlaySharp } from "react-icons/io5";
 import { HiOutlineArchiveBox } from "react-icons/hi2";
+import ReactPlayer from 'react-player';
 import axios from "axios";
+import CircularProgress from '@mui/material/CircularProgress';
+import Box from '@mui/material/Box';
+
 
 import CommentContainer from "../CommentContainer/CommentContainer";
 
@@ -13,29 +17,21 @@ export default function WatchingDetail(props) {
     const [videoUrl, setVideoUrl] = useState(null);
     const [ratingStatistic, setRatingStatistic] = useState([])
     const [isMoreLess, setIsMoreLess] = useState(false)
-    useEffect(() => {
-
-        fetchVideo();
-        return () => {
-            if (videoUrl) {
-                URL.revokeObjectURL(videoUrl);
-            }
-        };
-    }, []);
 
     useEffect(() => {
         if (props.anime.id) {
             fetchRatingAnime();
+            fetchVideo();
         }
     }, [props.anime.id]);
 
 
     const fetchVideo = async () => {
         try {
-            const response = await fetch('http://127.0.0.1:8000/video/4.mp4');
-            const blob = await response.blob();
-            const url = URL.createObjectURL(blob);
-            setVideoUrl(url);
+            console.log(`http://127.0.0.1:8000/anime/video?animeid=${props.anime.id}&episode=${props.episode}`)
+            const response = await axios.get(`http://127.0.0.1:8000/anime/video?animeid=${props.anime.id}&episode=${props.episode}`)
+            console.log(response.data.videoUrl)
+            setVideoUrl(response.data.videoUrl)
         } catch (error) {
             console.error('Error fetching video:', error);
         }
@@ -75,15 +71,21 @@ export default function WatchingDetail(props) {
     const handleMoreLessChange = () => {
         setIsMoreLess(prev => !prev)
     }
-
     return (
         <div id="watching-detail">
             <div className="video-container">
-                {videoUrl && (
-                    <video controls>
-                        <source src={videoUrl} type="video/mp4" />
-                    </video>
-                )}
+                {videoUrl ?
+                    (
+                        <ReactPlayer url={videoUrl} controls width="1328px" height="747px" />
+                    ) :
+                    (
+                        <div className="loading">
+                            <Box sx={{ display: 'flex' }}>
+                                <CircularProgress />
+                            </Box>
+                        </div>
+                    )
+                }
             </div>
             <div className="anime-detail">
                 <div className="anime-content">
@@ -139,7 +141,7 @@ export default function WatchingDetail(props) {
                                     </div>
                                 </div>
                                 <div className="video-content">
-                                    <div className="video-title">S{props.anime.season} - Episode {parseInt(props.episode)+1}</div>
+                                    <div className="video-title">S{props.anime.season} - Episode {parseInt(props.episode) + 1}</div>
                                     <div className="video-sub">{props.anime.language}</div>
                                 </div>
                             </div>
@@ -154,7 +156,7 @@ export default function WatchingDetail(props) {
                                     </div>
                                 </div>
                                 <div className="video-content">
-                                    <div className="video-title">S{props.anime.season} - Episode {parseInt(props.episode)-1}</div>
+                                    <div className="video-title">S{props.anime.season} - Episode {parseInt(props.episode) - 1}</div>
                                     <div className="video-sub">{props.anime.language}</div>
                                 </div>
                             </div>

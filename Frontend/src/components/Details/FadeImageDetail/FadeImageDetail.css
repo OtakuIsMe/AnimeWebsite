@@ -45,6 +45,7 @@
     left: 50px;
     top: 25%;
     width: 540px;
+    text-align: justify;
 }
 .anime-description span{
     color: white;

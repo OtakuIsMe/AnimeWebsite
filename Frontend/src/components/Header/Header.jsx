@@ -17,7 +17,7 @@ export default function Header() {
     const [isUserDropdown, setIsUserDropdown] = useState(false)
     const navigate = useNavigate()
 
-    const {user} = useContext(AuthContext)
+    const {user, logout} = useContext(AuthContext)
 
     async function fetchType() {
         const response = await axios.get('http://127.0.0.1:8000/anime/type/all')
@@ -124,9 +124,9 @@ export default function Header() {
                     <img src={user?.img.url} alt="" />
                     <div className="user-action-dropdown" style={isUserDropdown? {}: {display:'none'}}>
                         <div className="acc-info block" onClick={()=>{navigate(`/profile/manage`)}}>Account Info</div>
-                        <div className="film-store block" onClick={()=>{navigate(`/anime/watchlist`)}}>Watchlist</div>
-                        <div className="history block">History</div>
-                        <div className="log-out block">Log Out</div>
+                        <div className="film-store block" onClick={()=>{navigate(`/anime/store/watchlist`)}}>Watchlist</div>
+                        <div className="history block" onClick={()=>{navigate(`/anime/store/history`)}}>History</div>
+                        <div className="log-out block" onClick={logout}>Log Out</div>
                     </div>
                 </div>
             </div>

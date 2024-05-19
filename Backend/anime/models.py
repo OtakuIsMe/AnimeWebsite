@@ -133,6 +133,7 @@ class AnimeEspisode(models.Model):
     dateup = models.DateField(blank=True, null=True)
     isdeleted = models.BooleanField(blank=True, null=True)
     time = models.FloatField(blank=True, null=True)
+    video = models.CharField(max_length=400, blank=True, null=True)
 
     class Meta:
         managed = True

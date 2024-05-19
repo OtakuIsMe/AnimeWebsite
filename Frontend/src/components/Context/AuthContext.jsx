@@ -21,9 +21,13 @@ export const AuthProvider = ({ children }) => {
             console.error('Error logging in:', error);
         }
     };
+    const logout = ()=>{
+        setUser(null)
+        Cookies.remove('token')
+    }
 
     return (
-        <AuthContext.Provider value={{ user}}>
+        <AuthContext.Provider value={{ user, logout}}>
             {children}
         </AuthContext.Provider>
     );

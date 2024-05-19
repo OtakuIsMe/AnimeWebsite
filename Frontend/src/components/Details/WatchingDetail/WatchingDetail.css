@@ -10,10 +10,15 @@
     display: flex;
     justify-content: center;
 }
-#watching-detail .video-container video{
+
+#watching-detail .loading{
     height: 747px;
     width: 1328px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
+
 #watching-detail .anime-detail{
     width: 1080px;
     height: auto;

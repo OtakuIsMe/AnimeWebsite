@@ -4,7 +4,7 @@ import TextField from '@mui/material/TextField';
 import './Login.css';
 import axios from 'axios';
 import Cookies from 'js-cookie';
-
+import { useNavigate } from "react-router-dom";
 
 import login_hime from '../../../photos/log-in-hime.png'
 import login_yuzu from '../../../photos/log-in-yuzu.png'
@@ -12,6 +12,8 @@ import login_yuzu from '../../../photos/log-in-yuzu.png'
 export default function Login() {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const [status, setStatus] = useState(true)
+    const navigate = useNavigate()
 
     const handleInputEmail = (e) => {
         console.log(e.target.value)
@@ -24,9 +26,10 @@ export default function Login() {
 
     const checkLogin = async ()=>{
         const response = await axios.post(`http://127.0.0.1:8000/users/login`, {email: email, password: password})
-        console.log(response.data.status)
+        setStatus(response.data.status)
         if(response.data.status){
             Cookies.set('token', response.data.token , { expires: 1, sameSite: 'None', secure: true });
+            navigate('/')
         }
     }
 
@@ -62,6 +65,8 @@ export default function Login() {
                         </Box>
                     </div>
                     <div className="forget-pass">FORGOT PASSWORD?</div>
+
+                    <div className="notification" style={status? {display: 'none'}:{}}>Wrong Email/Password</div>
                 </div>
             </div>
             <div className="login-btn" onClick={checkLogin}>LOG IN</div>
