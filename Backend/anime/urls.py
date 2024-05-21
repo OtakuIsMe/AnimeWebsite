@@ -14,5 +14,6 @@ urlpatterns = [
     path("follow", views.follow_anime.as_view(), name="follow_anime"),
     path("follow/<int:userid>", views.get_anime_follow_by_user.as_view(), name="get_anime_follow_by_user"),
     path('video', views.get_anime_espisode_video.as_view(), name="get_anime_espisode_video"),
-    path('history/add', views.add_history_anime_user.as_view(), name='add_history_anime_user')
+    path('history/add', views.add_history_anime_user.as_view(), name='add_history_anime_user'),
+    path('history/get', views.get_history_anime_user.as_view(), name="get_history_anime_user")
 ]

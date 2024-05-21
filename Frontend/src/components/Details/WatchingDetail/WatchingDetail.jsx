@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import './WatchingDetail.css'
 import { IoIosStar } from "react-icons/io";
 import { GoTriangleDown } from "react-icons/go";
@@ -12,18 +12,55 @@ import Box from '@mui/material/Box';
 
 
 import CommentContainer from "../CommentContainer/CommentContainer";
+import AuthContext from "../../Context/AuthContext";
 
 export default function WatchingDetail(props) {
     const [videoUrl, setVideoUrl] = useState(null);
     const [ratingStatistic, setRatingStatistic] = useState([])
     const [isMoreLess, setIsMoreLess] = useState(false)
+    const [userId, setUserId]= useState(0)
+    const [animeId , setAnimeId] = useState(0)
+    const [currentTime, setCurrentTime] = useState(0);
+    
 
+    const handleProgress = (progress) => {
+        setCurrentTime(progress.playedSeconds);
+        console.log(progress.playedSeconds)
+    };
+
+    const {user} = useContext(AuthContext)
     useEffect(() => {
         if (props.anime.id) {
             fetchRatingAnime();
             fetchVideo();
+            setUserId(user.id)
+            setAnimeId(props.anime.id)
         }
     }, [props.anime.id]);
+
+    useEffect(()=>{
+        if(currentTime!=0)
+        window.addEventListener('beforeunload', handleBeforeUnload);
+        return () => {
+            window.removeEventListener('beforeunload', handleBeforeUnload);
+          };
+    },[userId, animeId, props.espisode, currentTime])
+
+    const handleBeforeUnload =async ()=>{
+        await axios.post('http://127.0.0.1:8000/anime/history/add', {userid : userId, animeid : animeId, espisode : props.episode, timeContinute :secondsToHms(currentTime)})
+    }
+
+    function secondsToHms(totalSeconds) {
+        const hours = Math.floor(totalSeconds / 3600);
+        const minutes = Math.floor((totalSeconds % 3600) / 60);
+        const seconds = Math.floor(totalSeconds % 60);
+    
+        const formattedHours = String(hours).padStart(2, '0');
+        const formattedMinutes = String(minutes).padStart(2, '0');
+        const formattedSeconds = String(seconds).padStart(2, '0');
+    
+        return `${formattedHours}:${formattedMinutes}:${formattedSeconds}`;
+    }
 
 
     const fetchVideo = async () => {
@@ -76,7 +113,7 @@ export default function WatchingDetail(props) {
             <div className="video-container">
                 {videoUrl ?
                     (
-                        <ReactPlayer url={videoUrl} controls width="1328px" height="747px" />
+                        <ReactPlayer onProgress={handleProgress} url={videoUrl} controls width="1328px" height="747px" />
                     ) :
                     (
                         <div className="loading">

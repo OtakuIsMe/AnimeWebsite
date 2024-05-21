@@ -157,5 +157,16 @@ class FollowAnime(models.Model):
     class Meta:
         managed = True
         db_table = 'follow_anime'
+        
+        
+class HistoryAnime(models.Model):
+    id = models.BigIntegerField(primary_key=True)
+    userid = models.ForeignKey(Users, models.DO_NOTHING, db_column='userid', blank=True, null=True)
+    animeespisodeid = models.ForeignKey(AnimeEspisode, models.DO_NOTHING, db_column='animeespisodeid', blank=True, null=True)
+    timecontinues = models.DurationField(blank=True, null=True)
+
+    class Meta:
+        managed = True
+        db_table = 'history_anime'
 
 
