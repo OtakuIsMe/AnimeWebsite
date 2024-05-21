@@ -1,17 +1,19 @@
-#watching-detail{
+#watching-detail {
     padding-top: 60px;
     background-color: black;
 }
-#watching-detail span{
+
+#watching-detail span {
     color: white;
 }
-#watching-detail .video-container{
+
+#watching-detail .video-container {
     width: 100%;
     display: flex;
     justify-content: center;
 }
 
-#watching-detail .loading{
+#watching-detail .loading {
     height: 747px;
     width: 1328px;
     display: flex;
@@ -19,89 +21,103 @@
     justify-content: center;
 }
 
-#watching-detail .anime-detail{
+#watching-detail .anime-detail {
     width: 1080px;
     height: auto;
     margin: 0 auto;
     display: flex;
     padding: 80px;
 }
-#watching-detail .anime-detail .anime-content{
+
+#watching-detail .anime-detail .anime-content {
     width: 750px;
     height: auto;
     padding: 0 30px 0 0;
 }
-#watching-detail .anime-detail .anime-espisode{
+
+#watching-detail .anime-detail .anime-espisode {
     width: 330px;
     height: auto;
 }
-#watching-detail .anime-detail .anime-content .anime-name-rating{
+
+#watching-detail .anime-detail .anime-content .anime-name-rating {
     display: flex;
 }
-#watching-detail .anime-name-rating .anime-name{
+
+#watching-detail .anime-name-rating .anime-name {
     padding-right: 8px;
     border-right: 2px solid #a0a0a0;
     height: auto;
 }
-#watching-detail .anime-name-rating .anime-rating{
+
+#watching-detail .anime-name-rating .anime-rating {
     display: flex;
     align-items: center;
     padding-left: 8px;
     color: #a0a0a0;
 }
-#watching-detail .anime-name-rating .anime-name span{
+
+#watching-detail .anime-name-rating .anime-name span {
     color: #f47521;
     font-weight: 600;
 }
-#watching-detail .anime-name-rating .anime-rating span{
+
+#watching-detail .anime-name-rating .anime-rating span {
     color: #a0a0a0;
 }
-#watching-detail .anime-name-rating .anime-rating .star{
+
+#watching-detail .anime-name-rating .anime-rating .star {
     margin: 0 5px;
     color: #f47521;
 }
-#watching-detail .anime-season-episode{
+
+#watching-detail .anime-season-episode {
     padding-top: 15px;
 }
-#watching-detail .anime-season-episode span{
+
+#watching-detail .anime-season-episode span {
     font-weight: 600;
     font-size: 22px;
 }
 
-#watching-detail .anime-sub-old span{
+#watching-detail .anime-sub-old span {
     color: #a0a0a0;
     font-size: 14px;
 }
-#watching-detail .anime-sub-old svg{
+
+#watching-detail .anime-sub-old svg {
     color: #a0a0a0;
     font-size: 5px;
     margin: 0 4px;
 }
-#watching-detail .release-date span{
+
+#watching-detail .release-date span {
     font-size: 14px;
 }
-#watching-detail .anime-detail .description{
+
+#watching-detail .anime-detail .description {
     padding-top: 15px;
 }
 
-#watching-detail .anime-detail .description span{
+#watching-detail .anime-detail .description span {
     display: flex;
     text-align: justify;
 }
 
-#watching-detail .anime-types{
+#watching-detail .anime-types {
     display: flex;
     margin-top: 20px;
 }
 
-#watching-detail .anime-type{
+#watching-detail .anime-type {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     background-color: #213944;
     margin-right: 10px;
 }
-#watching-detail .anime-type span{
+
+#watching-detail .anime-type span {
     color: #fff;
     margin-left: 5px;
     margin-right: 5px;
@@ -109,13 +125,14 @@
     margin-top: 5px;
 }
 
-#watching-detail .anime-audio{
+#watching-detail .anime-audio {
     position: relative;
     height: 50px;
     border-bottom: 2px solid #a0a0a0;
     margin-top: 20px;
 }
-#watching-detail .audio-key{
+
+#watching-detail .audio-key {
     color: #fff;
     position: absolute;
     left: 0;
@@ -123,14 +140,15 @@
     margin-bottom: 10px;
 }
 
-#watching-detail .audio-value{
+#watching-detail .audio-value {
     color: #fff;
     position: absolute;
     right: 0;
     margin-top: 10px;
     margin-bottom: 10px;
 }
-#watching-detail .more-less-action{
+
+#watching-detail .more-less-action {
     cursor: pointer;
     color: white;
     font-weight: 500;
@@ -138,7 +156,7 @@
     margin-top: 30px;
 }
 
-#watching-detail .video-img{
+#watching-detail .video-img {
     width: 151px;
     height: 85px;
     background-size: cover;
@@ -148,7 +166,7 @@
     justify-content: center;
 }
 
-#watching-detail .anime-time{
+#watching-detail .anime-time {
     position: absolute;
     width: 30px;
     height: 20px;
@@ -162,7 +180,8 @@
     font-size: 12px;
     font-weight: 600;
 }
-#watching-detail .play-button{
+
+#watching-detail .play-button {
     width: 40px;
     height: 40px;
     border-radius: 50%;
@@ -171,12 +190,13 @@
     align-items: center;
     justify-content: center;
 }
-#watching-detail .play-button svg{
+
+#watching-detail .play-button svg {
     font-size: 25px;
     color: white;
 }
 
-#watching-detail .see-more-btn{
+#watching-detail .see-more-btn {
     padding: 5px 8px;
     display: flex;
     align-items: center;
@@ -185,61 +205,127 @@
     cursor: pointer;
 }
 
-#watching-detail .see-more-btn svg{
+#watching-detail .see-more-btn svg {
     color: #dadada;
     font-size: 20px;
 }
-#watching-detail .see-more-btn div{
+
+#watching-detail .see-more-btn div {
     color: #dadada;
     font-weight: 700;
     font-size: 14px;
     margin-left: 5px;
 }
 
-#watching-detail .next-ep{
+#watching-detail .next-ep {
     padding-bottom: 25px;
 }
 
-#watching-detail .prev-ep{
+#watching-detail .prev-ep {
     padding-bottom: 25px;
 }
 
-#watching-detail .next-title,#watching-detail .prev-title{
+#watching-detail .next-title,
+#watching-detail .prev-title {
     color: white;
     margin-bottom: 15px;
 }
 
-#watching-detail .next-video,#watching-detail .prev-video{
+#watching-detail .next-video,
+#watching-detail .prev-video {
     display: flex;
 }
 
-#watching-detail .prev-next-espisode .video-content{
+#watching-detail .prev-next-espisode .video-content {
     margin-left: 10px;
 }
 
-#watching-detail .prev-next-espisode .video-title{
+#watching-detail .prev-next-espisode .video-title {
     font-size: 14px;
     color: white;
     margin-top: 5px;
     font-weight: 600;
 }
 
-#watching-detail .prev-next-espisode .video-sub{
+#watching-detail .prev-next-espisode .video-sub {
     font-size: 14px;
     color: #a0a0a0;
     margin-top: 26px;
     font-weight: 600;
 }
 
+#watching-detail .watching-continute {
+    position: fixed;
+    bottom: -100px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #23252b;
+    padding: 10px 20px;
+    border: 1px solid #373737;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    z-index: 4;
+    animation: slideUp 0.3s forwards;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#watching-detail .watching-continute .notification-close span {
+    font-weight: 700;
+}
+
+#watching-detail .watching-continute .content {
+    margin-top: 20px;
+}
+
+#watching-detail .watching-continute .content p {
+    color: #a0a0a0;
+    margin: 0;
+}
+
+#watching-detail .watching-continute .action-btn {
+    display: flex;
+    margin-top: 20px;
+}
+
+#watching-detail .watching-continute .action-btn div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 120px;
+    height: 40px;
+    margin: 0 5px;
+    border: 2px solid #f47521;
+    color: #f47521;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+#watching-detail .watching-continute .action-btn .yes {
+    background-color: #f47521;
+    color: #000;
+}
+
+#watching-detail .watching-continute .action-btn .yes:hover {
+    background-color: #f38135;
+    border: 2px solid #f38135;
+}
+
+#watching-detail .watching-continute .action-btn .no:hover {
+    border: 2px solid #f38135;
+    color: #f38135;
+}
 
 
+@keyframes slideUp {
+    from {
+        bottom: -100px;
+        /* Bắt đầu từ vị trí dưới cùng của trang */
+    }
 
-
-
-
-
-
-
-
-
-
+    to {
+        bottom: 45%;
+        /* Kết thúc ở giữa trang */
+    }
+}

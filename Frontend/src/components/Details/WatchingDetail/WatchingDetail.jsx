@@ -18,47 +18,54 @@ export default function WatchingDetail(props) {
     const [videoUrl, setVideoUrl] = useState(null);
     const [ratingStatistic, setRatingStatistic] = useState([])
     const [isMoreLess, setIsMoreLess] = useState(false)
-    const [userId, setUserId]= useState(0)
-    const [animeId , setAnimeId] = useState(0)
+    const [userId, setUserId] = useState(0)
+    const [animeId, setAnimeId] = useState(0)
     const [currentTime, setCurrentTime] = useState(0);
-    
+    const [showNoitification, setShowNotification] = useState(false)
+    const [timeContinute, setTimeContinute] = useState(0)
+    const videoTime = useRef(null)
 
-    const handleProgress = (progress) => {
-        setCurrentTime(progress.playedSeconds);
-        console.log(progress.playedSeconds)
-    };
 
-    const {user} = useContext(AuthContext)
+    const { user } = useContext(AuthContext)
     useEffect(() => {
         if (props.anime.id) {
             fetchRatingAnime();
             fetchVideo();
             setUserId(user.id)
             setAnimeId(props.anime.id)
+            fetchingTimeContinute();
         }
     }, [props.anime.id]);
 
-    useEffect(()=>{
-        if(currentTime!=0)
-        window.addEventListener('beforeunload', handleBeforeUnload);
+    useEffect(() => {
+        if (currentTime != 0)
+            window.addEventListener('beforeunload', handleBeforeUnload);
         return () => {
             window.removeEventListener('beforeunload', handleBeforeUnload);
-          };
-    },[userId, animeId, props.espisode, currentTime])
+        };
+    }, [userId, animeId, props.espisode, currentTime])
 
-    const handleBeforeUnload =async ()=>{
-        await axios.post('http://127.0.0.1:8000/anime/history/add', {userid : userId, animeid : animeId, espisode : props.episode, timeContinute :secondsToHms(currentTime)})
+    const handleBeforeUnload = async () => {
+        await axios.post('http://127.0.0.1:8000/anime/history/add', { userid: userId, animeid: animeId, espisode: props.episode, timeContinute: secondsToHms(currentTime) })
+    }
+
+    async function fetchingTimeContinute(){
+        const response = await axios.post('http://127.0.0.1:8000/anime/history/get', { userid: user.id, animeid: props.anime.id, espisode: props.episode})
+        setTimeContinute(response.data.time)
+        if(response.data.time>0 && showNoitification == false){
+            setShowNotification(true)
+        }
     }
 
     function secondsToHms(totalSeconds) {
         const hours = Math.floor(totalSeconds / 3600);
         const minutes = Math.floor((totalSeconds % 3600) / 60);
         const seconds = Math.floor(totalSeconds % 60);
-    
+
         const formattedHours = String(hours).padStart(2, '0');
         const formattedMinutes = String(minutes).padStart(2, '0');
         const formattedSeconds = String(seconds).padStart(2, '0');
-    
+
         return `${formattedHours}:${formattedMinutes}:${formattedSeconds}`;
     }
 
@@ -105,15 +112,46 @@ export default function WatchingDetail(props) {
         }
     }
 
+
     const handleMoreLessChange = () => {
         setIsMoreLess(prev => !prev)
     }
+    const handleProgress = (progress) => {
+        setCurrentTime(progress.playedSeconds);
+        console.log(progress.playedSeconds)
+    };
+    const handleAgreeWatchContinute = ()=>{
+        if (videoTime.current) {
+            videoTime.current.seekTo(timeContinute);
+            videoTime.current.getInternalPlayer().play();
+        }
+        console
+        setShowNotification(false);
+    }
+    const handleDisAgreeWatchContinute = ()=>{
+        setShowNotification(false);
+    }
     return (
         <div id="watching-detail">
+            {showNoitification && (
+                <div className="watching-continute">
+                    <div className="notification-close">
+                        <span>Notification</span>
+                    </div>
+                    <div className="content">
+                        <p>We have recorded that you have watched until {secondsToHms(timeContinute)}</p>
+                        <p>Do you want to continute </p>
+                    </div>
+                    <div className="action-btn">
+                        <div className="yes" onClick={handleAgreeWatchContinute}>YES</div>
+                        <div className="no" onClick={handleDisAgreeWatchContinute}>NO</div>
+                    </div>
+                </div>
+            )}
             <div className="video-container">
                 {videoUrl ?
                     (
-                        <ReactPlayer onProgress={handleProgress} url={videoUrl} controls width="1328px" height="747px" />
+                        <ReactPlayer onProgress={handleProgress} ref={videoTime} url={videoUrl} controls width="1328px" height="747px" />
                     ) :
                     (
                         <div className="loading">
