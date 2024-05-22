@@ -23,6 +23,7 @@ export default function FilmStore({ type }) {
             let progress2 = document.querySelector('.watchlist')
             progress2.classList.add('selected')
         } else if (user && type === 'history') {
+            fetchAnimeHistory(user.id)
             let progress2 = document.querySelector('.historylist')
             progress2.classList.add('selected')
         }
@@ -30,6 +31,10 @@ export default function FilmStore({ type }) {
 
     async function fetchAnimeStore(userid) {
         const response = await axios.get(`http://127.0.0.1:8000/anime/follow/${userid}`)
+        setAnimes(response.data)
+    }
+    async function fetchAnimeHistory(userid){
+        const response = await axios.get(`http://127.0.0.1:8000/anime/history/${userid}`)
         setAnimes(response.data)
         console.log(response.data)
     }

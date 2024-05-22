@@ -125,8 +125,9 @@ class get_anime_by_name(APIView):
             anime_name_string = ''
             for elementX in x:
                 anime_name_string = anime_name_string + elementX + ' '
+            print(anime_name_string)
             animeName = AnimeName.objects.get(
-                name__icontains=anime_name_string.strip())
+                name__iexact=anime_name_string.strip())
             anime = animeName.animeid
             anime_data = AnimeSerializer(anime).data
             anime_data['images'] = imagesView.get_all_image_anime(anime.id)
@@ -345,6 +346,29 @@ class get_history_anime_user(APIView):
                 return Response({'time': animeHistory.timecontinues.total_seconds()})
             except Exception as e:
                 return Response({'time': 0})
+        except Exception as e:
+            print(f'Error get history anime: {e}')
+            return Response({'message': 'Error get history anime'})
+class get_user_list_anime_history(APIView):
+    def get(self, request, userid):
+        try:
+            user = Users.objects.get(pk = userid)
+            animeHistorys =HistoryAnime.objects.filter(userid = user)
+            animeEspisodes = []
+            animes =[]
+            for animeHistory in animeHistorys:
+                animeEspisodes.append(animeHistory.animeespisodeid) 
+            for animeEspisode in animeEspisodes:
+                if animeEspisode.animeid not in [a for a in animes]:
+                    animes.append(animeEspisode.animeid)
+            animeDatas = []
+            for anime in animes:
+                animeData = AnimeSerializer(anime).data
+                name = AnimeName.objects.get(animeid=anime, status=1)
+                animeData['images'] = imagesView.get_all_image_anime(anime.id)
+                animeData['name'] = AnimeNameSerializer(name).data['name']
+                animeDatas.append(animeData)
+            return Response(animeDatas)
         except Exception as e:
             print(f'Error get history anime: {e}')
             return Response({'message': 'Error get history anime'})

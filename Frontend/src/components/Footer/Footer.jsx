@@ -1,11 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
 import './Footer.css';
 import { FaYoutube } from "react-icons/fa";
 import { IoLogoFacebook } from "react-icons/io";
 import { AiFillTikTok } from "react-icons/ai";
 import { IoLogoGithub } from "react-icons/io";
+import { useNavigate } from "react-router-dom";
+
+import AuthContext from "../Context/AuthContext";
 
 export default function Footer() {
+    const { user, logout } = useContext(AuthContext)
+    const navigate = useNavigate()
     return (
         <div id="footer">
             <div className="footer-content">
@@ -45,6 +50,19 @@ export default function Footer() {
                 <div className="account-info block">
                     <div>
                         <div className="title">Account</div>
+                        {user ? (
+                            <React.Fragment>
+                                <p onClick={()=>{navigate('/profile/manage')}}>Account Info</p>
+                                <p onClick={()=>{navigate('/anime/store/watchlist')}}>WatchList</p>
+                                <p onClick={()=>{navigate('/anime/store/history')}}>History</p>
+                                <p onClick={logout}>Log Out</p>
+                            </React.Fragment>
+                        ) : (
+                            <React.Fragment>
+                                <p onClick={()=>{navigate('/')}}>Create Account</p>
+                                <p onClick={()=>{navigate('/login')}}>Log In</p>
+                            </React.Fragment>
+                        )}
                     </div>
                 </div>
             </div>
