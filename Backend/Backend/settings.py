@@ -39,7 +39,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'corsheaders',
     'rest_framework',
-    'rest_framework_simplejwt',
     'users',
     'anime',
     'images',
@@ -86,8 +85,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.oracle',
         'NAME': 'localhost:1521/orcl',
-        'USER': 'hr',
-        'PASSWORD': '12345'
+        'USER': 'OTAKUISME',
+        'PASSWORD': 'CuongDuy123'
     }
 }
 
