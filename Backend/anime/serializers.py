@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Type, Season, Showtimes, AnimeSeries, Anime, Studio, StudioAnime, TypeAnime, Director, DirectorAnime, Author, AuthorAnime, AnimeCharacter, AnimeEspisode, AnimeName, FollowAnime
+from .models import Type, Season, Showtimes, AnimeSeries, Anime, Studio, StudioAnime, TypeAnime, Director, DirectorAnime, Author, AuthorAnime, AnimeCharacter, AnimeEspisode, AnimeName, FollowAnime, HistoryAnime
 
 class TypeSerializer(serializers.ModelSerializer):
     class Meta:
@@ -76,4 +76,8 @@ class AnimeNameSerializer(serializers.ModelSerializer):
 class FollowAnimeSerializer(serializers.ModelSerializer):
     class Meta:
         model = FollowAnime
+        fields = '__all__'
+class HistoryAnimeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = HistoryAnime
         fields = '__all__'

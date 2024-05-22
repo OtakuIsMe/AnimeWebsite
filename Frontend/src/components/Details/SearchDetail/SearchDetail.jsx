@@ -5,15 +5,23 @@ import { RxCross1 } from "react-icons/rx";
 import axios from "axios";
 
 import emptySearch from '../../../photos/empty-search.png'
+import { RxCross2 } from "react-icons/rx";
 
 export default function SearchDetail(props) {
     const [q, setQ] = useState(props.q)
     const [animes, setAnimes] = useState([0])
+    const [searchRecent, setSearchRecent]= useState([])
     const navigate = useNavigate()
 
     useEffect(() => {
         fetchSearching()
     }, [q])
+    useEffect(()=>{
+        const searchStorage = localStorage.getItem('RECENT_SEARCHES')
+        if (searchStorage){
+            setSearchRecent(JSON.parse(searchStorage))
+        }
+    },[])
 
     async function fetchSearching() {
         if (q !== undefined && q !== '' && q !== null) {
@@ -40,6 +48,32 @@ export default function SearchDetail(props) {
         navigate(`/search`)
     }
 
+
+    function handleAnimeCardClick(name, anime) {
+        if (name) {
+            let lowerCaseString = name.toLowerCase();
+            let hyphenatedString = lowerCaseString.replace(/\s+/g, '-');
+            setSearchRecent(prevSearchRecent => {
+                const updatedSearchRecent = [...prevSearchRecent, anime];
+                localStorage.setItem('RECENT_SEARCHES', JSON.stringify(updatedSearchRecent));
+                return updatedSearchRecent;
+            });
+            window.location.href = `/anime/${hyphenatedString}`;
+        }
+    }
+
+    function removeAnimeSearch(anime){
+        const updatedSearchRecent = searchRecent.filter(item=>item!==anime)
+        setSearchRecent(updatedSearchRecent);
+        localStorage.setItem('RECENT_SEARCHES', JSON.stringify(updatedSearchRecent));
+    }
+
+    function removeAllAnimeSearch(){
+        setSearchRecent([]);
+        localStorage.setItem('RECENT_SEARCHES', JSON.stringify([]));
+    }
+
+
     return (
         <div id="search-detail">
             <div className="search-bar">
@@ -61,9 +95,9 @@ export default function SearchDetail(props) {
                         <div className="search-result">
                             <p className="title">Results</p>
                             <div className="anime-container">
-                                {animes.map((anime, key)=>{
+                                {animes.map((anime, key) => {
                                     return (
-                                        <div className="anime-detail" key={key}>
+                                        <div className="anime-detail" key={key} onClick={()=>{handleAnimeCardClick(anime.name, anime)}}>
                                             <img src={anime.images?.avatar} alt="" />
                                             <div className="anime-info">
                                                 <p className="anime-name">{anime.name}</p>
@@ -77,9 +111,20 @@ export default function SearchDetail(props) {
                         </div>
                     )) : (
                         <div className="result-clear-input">
-                            <span>Tìm Kiếm Gần Đây</span>
-                            <span>Clear</span>
-                            <div className="search-recently"></div>
+                            <span className="title">Recent Search Result</span>
+                            <span className="clear-btn" onClick={()=>{removeAllAnimeSearch()}}>CLEAR RECENTS</span>
+                            <div className="search-recently">
+                                {searchRecent.map((anime, index)=>{
+                                    return(
+                                        <div className="anime-tag" key={index}>
+                                            <div className="anime-name">{anime.name}</div>
+                                            <div className="cross-icon" onClick={()=>{removeAnimeSearch(anime)}}>
+                                                <RxCross2 />
+                                            </div>
+                                        </div>
+                                    )
+                                })}
+                            </div>
                         </div>
                     )}
             </div>

@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import './ResultListAnime.css'
+import { useNavigate } from "react-router-dom";
 
 import { IoPlayOutline } from "react-icons/io5";
 import { IoBookmarkOutline } from "react-icons/io5";
@@ -9,10 +10,18 @@ import axios from "axios";
 
 export default function ResultListAnime({ animes }) {
     const { user } = useContext(AuthContext)
+    const navigate = useNavigate()
 
     const fetchFollowAnime = async (animeid, userid) => {
         const response = await axios.post(`http://127.0.0.1:8000/anime/follow`, { anime_id: animeid, user_id: userid })
         console.log(response.data)
+    }
+    const handlePlayBtn = (name)=>{
+        if (name) {
+            let lowerCaseString = name.toLowerCase();
+            let hyphenatedString = lowerCaseString.replace(/\s+/g, '-');
+            navigate(`/anime/${hyphenatedString}`)
+        }
     }
     return (
         <div id='result-list-anime'>
@@ -29,7 +38,7 @@ export default function ResultListAnime({ animes }) {
                             <div className="episode">{anime.maxespisode} Episodes</div>
                             <div className="description">{anime.description}</div>
                             <div className="action-btn" >
-                                <div>
+                                <div onClick={()=>{handlePlayBtn(anime.name)}}>
                                     <IoPlayOutline />
                                 </div>
                                 <div onClick={() => fetchFollowAnime(anime.id, user.id)}>

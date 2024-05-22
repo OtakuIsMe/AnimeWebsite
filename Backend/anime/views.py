@@ -1,9 +1,9 @@
 from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from .models import Type, Season, AnimeEspisode, Anime, AnimeName, TypeAnime, Showtimes, FollowAnime
+from .models import Type, Season, AnimeEspisode, Anime, AnimeName, TypeAnime, Showtimes, FollowAnime, HistoryAnime
 from users.models import Users
-from .serializers import TypeSerializer, SeasonSerializer, AnimeEspisodeSerializer, AnimeSerializer, AnimeNameSerializer, TypeAnimeSerializer, ShowtimesSerializer, FollowAnimeSerializer
+from .serializers import TypeSerializer, SeasonSerializer, AnimeEspisodeSerializer, AnimeSerializer, AnimeNameSerializer, TypeAnimeSerializer, ShowtimesSerializer, FollowAnimeSerializer, HistoryAnimeSerializer
 from images import views as imagesView
 from django.utils import timezone
 from django.db.models import Max
@@ -125,8 +125,9 @@ class get_anime_by_name(APIView):
             anime_name_string = ''
             for elementX in x:
                 anime_name_string = anime_name_string + elementX + ' '
+            print(anime_name_string)
             animeName = AnimeName.objects.get(
-                name__icontains=anime_name_string.strip())
+                name__iexact=anime_name_string.strip())
             anime = animeName.animeid
             anime_data = AnimeSerializer(anime).data
             anime_data['images'] = imagesView.get_all_image_anime(anime.id)
@@ -307,8 +308,67 @@ class add_history_anime_user(APIView):
             anime_id = request.data['animeid']
             espisode = request.data['espisode']
             time_continute = request.data['timeContinute']
-            print(user_id, espisode, time_continute, anime_id)
-            return Response({'message': 'Added succesful'})
+            hours ,minutes, seconds = map(int, time_continute.split(':'))
+            
+            time_input = f"0 {hours:02}:{minutes:02}:{seconds:02}"
+            
+            anime = Anime.objects.get(pk = anime_id)
+            
+            animeEspisode = AnimeEspisode.objects.get(animeid = anime, espisode = espisode)
+            user = Users.objects.get(pk = user_id)
+            
+            animeHistory, created =  HistoryAnime.objects.update_or_create(
+                animeespisodeid = animeEspisode,
+                userid = user,
+                defaults={"timecontinues" : time_input}
+            )
+            if created:
+                return Response("Add Record")
+            else:
+                return Response("Update Record")
         except Exception as e:
             print(f'Error add history anime: {e}')
             return Response({'message': 'Error add history anime'})
+class get_history_anime_user(APIView):
+    def post(self, request):
+        try:
+            user_id = request.data['userid']
+            anime_id = request.data['animeid']
+            espisode = request.data['espisode']
+            
+            anime = Anime.objects.get(pk = anime_id)
+            
+            animeEspisode = AnimeEspisode.objects.get(animeid = anime, espisode = espisode)
+            user = Users.objects.get(pk = user_id)
+            
+            try:
+                animeHistory= HistoryAnime.objects.get(animeespisodeid = animeEspisode,userid = user)
+                return Response({'time': animeHistory.timecontinues.total_seconds()})
+            except Exception as e:
+                return Response({'time': 0})
+        except Exception as e:
+            print(f'Error get history anime: {e}')
+            return Response({'message': 'Error get history anime'})
+class get_user_list_anime_history(APIView):
+    def get(self, request, userid):
+        try:
+            user = Users.objects.get(pk = userid)
+            animeHistorys =HistoryAnime.objects.filter(userid = user)
+            animeEspisodes = []
+            animes =[]
+            for animeHistory in animeHistorys:
+                animeEspisodes.append(animeHistory.animeespisodeid) 
+            for animeEspisode in animeEspisodes:
+                if animeEspisode.animeid not in [a for a in animes]:
+                    animes.append(animeEspisode.animeid)
+            animeDatas = []
+            for anime in animes:
+                animeData = AnimeSerializer(anime).data
+                name = AnimeName.objects.get(animeid=anime, status=1)
+                animeData['images'] = imagesView.get_all_image_anime(anime.id)
+                animeData['name'] = AnimeNameSerializer(name).data['name']
+                animeDatas.append(animeData)
+            return Response(animeDatas)
+        except Exception as e:
+            print(f'Error get history anime: {e}')
+            return Response({'message': 'Error get history anime'})

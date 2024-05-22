@@ -125,3 +125,73 @@
     width: 80px;
     height: 120px;
 }
+
+#search-detail .result-clear-input{
+    width: 1130px;
+    position: relative;
+}
+
+#search-detail .result-clear-input .title{
+    color: white;
+    font-weight: 600;
+    font-size: 20px;
+}
+
+#search-detail .result-clear-input .clear-btn{
+    color: #a0a0a0;
+    margin-left: auto;
+    position: absolute;
+    right: 0px;
+    font-size: 14;
+    font-weight: 600;
+    cursor: pointer;
+}
+#search-detail .result-clear-input .clear-btn:hover{
+    color: white;
+}
+
+#search-detail .result-clear-input .search-recently{
+    padding-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+#search-detail .result-clear-input .anime-tag{
+    width: 25%;
+    padding: 0 10px;
+    display: flex;
+    align-items: center;
+}
+
+#search-detail .result-clear-input .anime-tag .anime-name{
+    background-color: #192e38;
+    color: #a0a0a0;
+    padding: 5px;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: -moz-available;
+}
+#search-detail .result-clear-input .anime-tag .cross-icon{
+    display: flex;
+    align-items: center;
+    justify-items: center;
+    height: 34px;
+    width: 34px;
+    background-color: #192e38;
+    cursor: pointer;
+}
+#search-detail .result-clear-input .anime-tag .cross-icon svg{
+    color: white;
+    font-size: 25px;
+}
+
+
+
+
+
+
+
+
