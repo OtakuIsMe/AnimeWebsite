@@ -26,5 +26,4 @@ urlpatterns = [
     path('images/', include('images.urls')),
     path('interact/', include('comment_rating.urls')),
     re_path(r'^img/(?P<path>.*)$', serve, {'document_root': settings.STATICFILES_DIRS[0]}),
-    re_path(r'^video/(?P<path>.*)$', serve, {'document_root': settings.STATICFILES_DIRS[1]}),
 ]

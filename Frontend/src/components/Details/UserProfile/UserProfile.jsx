@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
@@ -8,11 +8,13 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { DemoContainer, DemoItem } from '@mui/x-date-pickers/internals/demo';
 import dayjs from 'dayjs';
 import { GrEdit } from "react-icons/gr";
+import { IoCloudUploadOutline } from "react-icons/io5";
 
 import './UserProfile.css';
 import backgroundProfile from '../../../photos/background-profile.jpg'
 
 import AuthContext from "../../Context/AuthContext";
+import axios from "axios";
 
 export default function UserProfile() {
     const { user } = useContext(AuthContext)
@@ -21,6 +23,9 @@ export default function UserProfile() {
     const [dob, setDob] = useState(null)
     const [avatar, setAvatar] = useState('')
     const [username, setUsername] = useState('')
+    const [isOpenUploadImg, setIsOpenUploadImg] = useState(false)
+    const [imgUrl, setImgUrl] = useState('')
+    const inputRef = useRef(null)
 
     const Genders = [
         {
@@ -56,15 +61,56 @@ export default function UserProfile() {
     const handleDOBChange = (event) => {
         setDob(event)
     }
+
+    const handleImageChange = (event) => {
+        const file = event.target.files[0]
+        console.log(file)
+        setImgUrl(URL.createObjectURL(file))
+    }
+    const handleUploadClick = () => {
+        inputRef.current.click();
+    }
+    const handleClose = () => {
+        const uploadForm = document.querySelector('.upload-form');
+        uploadForm.classList.add('slide-down');
+        setTimeout(() => {
+            setIsOpenUploadImg(false);
+        }, 300);
+    };
+    const handleSaveInfo = async () => {
+        const response = await axios.post(`http://127.0.0.1:8000/users/update`)
+    }
     return (
         <div id="user-profile">
-            <p className="title">Edit Profile</p>
+            <div className="upload">
+                {isOpenUploadImg && (
+                    <div className="upload-form">
+                        <p className="title">Avatar Selection</p>
+                        <p className="description">Drop your avatar! You can change it at any time.</p>
+                        {imgUrl ? (
+                            <div className="img-container" onClick={handleUploadClick}>
+                                <img src={imgUrl} alt="" />
+                            </div>
+                        ) : (
+                            <div className="upload-img" onClick={handleUploadClick}>
+                                <IoCloudUploadOutline />
+                            </div>
+                        )}
+                        <input type="file" ref={inputRef} onChange={handleImageChange} style={{ display: 'none' }} />
+                        <div className="btn-action">
+                            <div className="save-btn" onClick={() => { handleClose(); setAvatar(imgUrl) }}>SAVE</div>
+                            <div className="cancel-btn" onClick={() => { handleClose() }}>CANCEL</div>
+                        </div>
+                    </div>
+                )}
+            </div>
+            <p className="title-profile">Edit Profile</p>
             <div className="profile-card">
                 <img src={backgroundProfile} alt="" />
                 <div className="info-fill">
                     <div className="avatar-container">
                         <img className="avatar-user" src={avatar} alt="" />
-                        <div className="edit-avatar">
+                        <div className="edit-avatar" onClick={() => { setIsOpenUploadImg(true) }}>
                             <GrEdit />
                         </div>
                     </div>
@@ -142,7 +188,7 @@ export default function UserProfile() {
             </div>
             <div className="action-btn">
                 <div className="save but">SAVE</div>
-                <div className="cancel but">CANCEL</div>
+                <div className="cancel but" onClick={() => { window.location.href = '/'; }}>CANCEL</div>
             </div>
         </div>
     )

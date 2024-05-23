@@ -4,7 +4,10 @@ from rest_framework.views import APIView
 from .models import Users, Role
 from .serializers import UsersSerializer, RoleSerializer
 from images import views as ImgView
+from images.models import Images
+from images.serializers import ImagesSerializer
 import jwt
+import base64
 
 # Create your views here.
 
@@ -42,4 +45,27 @@ class get_user_by_token(APIView):
         token = request.data['token']
         decode = jwt.decode(token, 'I am atomic', algorithms=['HS256'])
         return Response(decode)
+    
+class update_user(APIView):
+    def post(self, request):
+        user_id = request.data['userid']
+        dob = request.data['dob']
+        image_file = request.FILES['img']
+        gender = request.data['gender']
+        username = request.data['username']
+        user = Users.objects.get(pk = user_id)
+        user.dob = dob
+        user.gender = gender
+        user.username = username
+        user.save()
+
+        with image_file.open('rb') as f:
+                img_binary_data = f.read()
+        img_base64 = base64.b64encode(
+            img_binary_data).decode('utf-8')
+
+        image = Images.objects.get(userid = user)
+        image.url = img_base64
+        image.save()
+        return Response({"message":"Added successful"})
 

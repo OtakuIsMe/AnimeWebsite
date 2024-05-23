@@ -12,7 +12,7 @@
     background-color: #141519
 }
 
-#user-profile .title {
+#user-profile .title-profile {
     font-weight: 600;
     font-size: 30px;
     color: white;
@@ -38,7 +38,7 @@
     border-radius: 50%;
 }
 
-#user-profile .profile-card .info-fill .edit-avatar{
+#user-profile .profile-card .info-fill .edit-avatar {
     position: absolute;
     right: 0;
     bottom: 0;
@@ -53,7 +53,7 @@
     cursor: pointer;
 }
 
-#user-profile .profile-card .info-fill .edit-avatar svg{
+#user-profile .profile-card .info-fill .edit-avatar svg {
     color: #000;
 }
 
@@ -136,12 +136,13 @@
 #user-profile .dob-contain .MuiInputBase-root fieldset {
     border: #0000;
 }
+
 #user-profile .action-btn {
     display: flex;
     padding: 30px;
 }
 
-#user-profile .action-btn .but{
+#user-profile .action-btn .but {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -153,18 +154,144 @@
     font-weight: 600;
     cursor: pointer;
 }
-#user-profile .action-btn .save{
+
+#user-profile .action-btn .save {
     background-color: #f47521;
     color: #000;
 }
 
-#user-profile .action-btn .save:hover{
+#user-profile .action-btn .save:hover {
     background-color: #f38135;
     border: 2px solid #f38135;
 }
-#user-profile .action-btn .cancel:hover{
+
+#user-profile .action-btn .cancel:hover {
     border: 2px solid #f38135;
     color: #f38135;
 }
 
+#user-profile .upload-form {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #23252b;
+    padding: 60px 40px;
+    border: 1px solid #373737;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    z-index: 4;
+    animation: slideUp 0.3s forwards;
+    width: 720px;
+    height: 800px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
+@keyframes slideUp {
+    from {
+        top: 100%;
+    }
+
+    to {
+        top: 53%;
+    }
+}
+
+@keyframes slideDown {
+    from {
+        top: 53%;
+    }
+
+    to {
+        top: 150%;
+    }
+}
+
+#user-profile .upload .upload-form.slide-down {
+    animation: slideDown 0.3s forwards;
+}
+
+#user-profile .upload-form .title {
+    color: white;
+    font-weight: 600;
+    font-size: 32px;
+}
+
+#user-profile .upload-form .description {
+    color: white;
+    font-weight: 500;
+    font-size: 20px;
+    margin: 0;
+    margin-top: 30px;
+}
+
+#user-profile .upload-form .upload-img {
+    width: 100%;
+    height: 400px;
+    border: 2px dashed #a0a0a0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 40px;
+    cursor: pointer;
+}
+
+#user-profile .upload-form .upload-img svg {
+    color: #a0a0a0;
+    font-size: 160px;
+}
+
+#user-profile .upload-form .btn-action {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+}
+
+#user-profile .upload-form .btn-action .save-btn,
+#user-profile .upload-form .btn-action .cancel-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 120px;
+    height: 40px;
+    margin: 0 25px;
+    border: 2px solid #f47521;
+    color: #f47521;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+#user-profile .upload-form .btn-action .save-btn {
+    background-color: #f47521;
+    color: #000;
+}
+
+#user-profile .upload-form .btn-action .save-btn:hover {
+    background-color: #f38135;
+    border: 2px solid #f38135;
+}
+
+#user-profile .upload-form .btn-action .cancel-btn:hover {
+    border: 2px solid #f38135;
+    color: #f38135;
+}
+
+#user-profile .upload-form .img-container {
+    width: 100%;
+    height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 40px;
+}
+
+#user-profile .upload-form .img-container img {
+    border-radius: 50%;
+    width: 360px;
+    height: 360px;
+    object-fit: cover;
+}
