@@ -15,7 +15,7 @@ export const AuthProvider = ({ children }) => {
 
     const login = async (token) => {
         try {
-            const response = await axios.post(`http://127.0.0.1:8000/users/token`, { token });
+            const response = await axios.post(`${import.meta.env.VITE_URL_DOMAIN}/users/token`, { token });
             setUser(response.data);
         } catch (error) {
             console.error('Error logging in:', error);

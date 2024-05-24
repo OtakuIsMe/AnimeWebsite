@@ -20,12 +20,12 @@ export default function Header() {
     const {user, logout} = useContext(AuthContext)
 
     async function fetchType() {
-        const response = await axios.get('http://127.0.0.1:8000/anime/type/all')
+        const response = await axios.get(`${import.meta.env.VITE_URL_DOMAIN}/anime/type/all`)
         setTypes(response.data)
     }
 
     async function fetchSeason(){
-        const response = await axios.get('http://127.0.0.1:8000/anime/season/lately')
+        const response = await axios.get(`${import.meta.env.VITE_URL_DOMAIN}/anime/season/lately`)
         setSeasons(response.data)
     }
 

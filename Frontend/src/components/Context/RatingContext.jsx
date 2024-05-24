@@ -22,7 +22,7 @@ export const RatingProvider = ({ children, anime }) => {
     async function fetchAnimeRating() {
         try {
             
-            const response = await axios.get(`http://127.0.0.1:8000/interact/rating?anime_id=${anime?.id}&user_id=${user.id}`);
+            const response = await axios.get(`${import.meta.env.VITE_URL_DOMAIN}/interact/rating?anime_id=${anime?.id}&user_id=${user.id}`);
             setRating(response.data.rating);
         } catch (error) {
             console.error('Error fetching anime rating:', error);
@@ -30,7 +30,7 @@ export const RatingProvider = ({ children, anime }) => {
     }
 
     async function fetchPostDataRating(rating){
-        const response = await axios.post(`http://127.0.0.1:8000/interact/rating/anime`, {
+        const response = await axios.post(`${import.meta.env.VITE_URL_DOMAIN}/interact/rating/anime`, {
             anime_id: anime.id,
             user_id: user.id,
             rating : rating
