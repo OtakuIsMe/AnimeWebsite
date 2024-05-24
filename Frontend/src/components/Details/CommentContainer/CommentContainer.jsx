@@ -52,12 +52,12 @@ export default function CommentContainer(props) {
     }, [rating])
 
     async function fetchRatingAnime() {
-        const response = await axios.get(`http://127.0.0.1:8000/interact/rating/statistic/${props.animeid}`)
+        const response = await axios.get(`${import.meta.env.VITE_URL_DOMAIN}/interact/rating/statistic/${props.animeid}`)
         setRatingStatistic(response.data)
     }
 
     async function fetchCommentAnime(count) {
-        const response = await axios.get(`http://127.0.0.1:8000/interact/comment?count=${count}&anime_id=${props.animeid}`)
+        const response = await axios.get(`${import.meta.env.VITE_URL_DOMAIN}/interact/comment?count=${count}&anime_id=${props.animeid}`)
         setComments(response.data)
     }
 

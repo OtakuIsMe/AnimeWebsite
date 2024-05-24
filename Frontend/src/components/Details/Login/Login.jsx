@@ -25,7 +25,7 @@ export default function Login() {
     }
 
     const checkLogin = async ()=>{
-        const response = await axios.post(`http://127.0.0.1:8000/users/login`, {email: email, password: password})
+        const response = await axios.post(`${import.meta.env.VITE_URL_DOMAIN}/users/login`, {email: email, password: password})
         setStatus(response.data.status)
         if(response.data.status){
             Cookies.set('token', response.data.token , { expires: 1, sameSite: 'None', secure: true });

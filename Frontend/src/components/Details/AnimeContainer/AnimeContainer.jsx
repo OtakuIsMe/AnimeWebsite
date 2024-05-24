@@ -11,11 +11,11 @@ export default function AnimeContainer(){
         fetchUpcomingAnime()
     },[])
     async function fetchNewestAnime(){
-        const response = await axios.get(`http://127.0.0.1:8000/anime/newest/16`)
+        const response = await axios.get(`${import.meta.env.VITE_URL_DOMAIN}/anime/newest/16`)
         setNewestList(response.data)
     }
     async function fetchUpcomingAnime(){
-        const response = await axios.get(`http://127.0.0.1:8000/anime/upcoming/16`)
+        const response = await axios.get(`${import.meta.env.VITE_URL_DOMAIN}/anime/upcoming/16`)
         setUpcomingList(response.data)
         console.log(response.data)
     }

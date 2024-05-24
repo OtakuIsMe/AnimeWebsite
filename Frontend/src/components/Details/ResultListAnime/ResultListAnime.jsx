@@ -13,7 +13,7 @@ export default function ResultListAnime({ animes }) {
     const navigate = useNavigate()
 
     const fetchFollowAnime = async (animeid, userid) => {
-        const response = await axios.post(`http://127.0.0.1:8000/anime/follow`, { anime_id: animeid, user_id: userid })
+        const response = await axios.post(`${import.meta.env.VITE_URL_DOMAIN}/anime/follow`, { anime_id: animeid, user_id: userid })
         console.log(response.data)
     }
     const handlePlayBtn = (name)=>{

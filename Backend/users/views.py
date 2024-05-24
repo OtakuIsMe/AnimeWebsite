@@ -48,24 +48,31 @@ class get_user_by_token(APIView):
     
 class update_user(APIView):
     def post(self, request):
-        user_id = request.data['userid']
-        dob = request.data['dob']
-        image_file = request.FILES['img']
-        gender = request.data['gender']
-        username = request.data['username']
-        user = Users.objects.get(pk = user_id)
-        user.dob = dob
-        user.gender = gender
-        user.username = username
-        user.save()
+        try:
+            user_id = request.data['userid']
+            dob = request.data['dob']
+            gender = request.data['gender']
+            username = request.data['username']
+            user = Users.objects.get(pk = user_id)
+            user.dob = dob
+            user.gender = gender
+            user.username = username
+            user.save()
+            try:
+                image_file = request.FILES['img']
+                with image_file.open('rb') as f:
+                        img_binary_data = f.read()
+                img_base64 = base64.b64encode(
+                    img_binary_data).decode('utf-8')
 
-        with image_file.open('rb') as f:
-                img_binary_data = f.read()
-        img_base64 = base64.b64encode(
-            img_binary_data).decode('utf-8')
-
-        image = Images.objects.get(userid = user)
-        image.url = img_base64
-        image.save()
-        return Response({"message":"Added successful"})
+                image = Images.objects.get(userid = user)
+                print(image.id)
+                image.url = img_base64
+                image.save()
+            except Exception as e:
+                print(f"Error update user:{e}")
+            return Response({"message":"Added successful"})
+        except Exception as e:
+            print(f"Error update user:{e}")
+            return Response({"message": "Error update user"})
 

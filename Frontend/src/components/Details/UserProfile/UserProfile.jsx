@@ -25,6 +25,7 @@ export default function UserProfile() {
     const [username, setUsername] = useState('')
     const [isOpenUploadImg, setIsOpenUploadImg] = useState(false)
     const [imgUrl, setImgUrl] = useState('')
+    const [imgFile, setImgFile] = useState(null)
     const inputRef = useRef(null)
 
     const Genders = [
@@ -64,8 +65,8 @@ export default function UserProfile() {
 
     const handleImageChange = (event) => {
         const file = event.target.files[0]
-        console.log(file)
         setImgUrl(URL.createObjectURL(file))
+        inputRef.current.file = file;
     }
     const handleUploadClick = () => {
         inputRef.current.click();
@@ -77,8 +78,31 @@ export default function UserProfile() {
             setIsOpenUploadImg(false);
         }, 300);
     };
-    const handleSaveInfo = async () => {
-        const response = await axios.post(`http://127.0.0.1:8000/users/update`)
+    async function handleSaveInfo (){
+        const data = new FormData()
+        data.append('img', imgFile)
+        data.append('userid', user.id)
+        data.append('dob', formatDateToYYYYMMDD(dob))
+        data.append('username', username)
+        data.append('gender', gender)
+        const response = await axios.post(`${import.meta.env.VITE_URL_DOMAIN}/users/update`, data, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            },
+        })
+        console.log(response.data)
+    }
+    function handleSaveImg(){
+        const file = inputRef.current.file
+        handleClose()
+        setAvatar(imgUrl)
+        setImgFile(file)
+    }
+    const formatDateToYYYYMMDD = (dateObject) => {
+        if (dateObject && dateObject.$d) {
+          return dayjs(dateObject.$d).format('YYYY-MM-DD');
+        }
+        return null;
     }
     return (
         <div id="user-profile">
@@ -98,8 +122,8 @@ export default function UserProfile() {
                         )}
                         <input type="file" ref={inputRef} onChange={handleImageChange} style={{ display: 'none' }} />
                         <div className="btn-action">
-                            <div className="save-btn" onClick={() => { handleClose(); setAvatar(imgUrl) }}>SAVE</div>
-                            <div className="cancel-btn" onClick={() => { handleClose() }}>CANCEL</div>
+                            <div className="save-btn" onClick={() => {handleSaveImg()}}>SAVE</div>
+                            <div className="cancel-btn" onClick={() => { handleClose(); setImgUrl('') }}>CANCEL</div>
                         </div>
                     </div>
                 )}
@@ -135,7 +159,7 @@ export default function UserProfile() {
                             noValidate
                             autoComplete="off"
                         >
-                            <TextField id="standard-basic" label="Email" variant="standard" value={email} onChange={handleEmailChange} />
+                            <TextField id="standard-basic" label="Email" variant="standard" value={email} onChange={handleEmailChange} InputProps={{readOnly: true,}} />
                         </Box>
                     </div>
                     <div className="gender-dob">
@@ -187,7 +211,7 @@ export default function UserProfile() {
                 </div>
             </div>
             <div className="action-btn">
-                <div className="save but">SAVE</div>
+                <div className="save but" onClick={()=>{handleSaveInfo()}}>SAVE</div>
                 <div className="cancel but" onClick={() => { window.location.href = '/'; }}>CANCEL</div>
             </div>
         </div>

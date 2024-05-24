@@ -46,11 +46,11 @@ export default function WatchingDetail(props) {
     }, [userId, animeId, props.espisode, currentTime])
 
     const handleBeforeUnload = async () => {
-        await axios.post('http://127.0.0.1:8000/anime/history/add', { userid: userId, animeid: animeId, espisode: props.episode, timeContinute: secondsToHms(currentTime) })
+        await axios.post(`${import.meta.env.VITE_URL_DOMAIN}/anime/history/add`, { userid: userId, animeid: animeId, espisode: props.episode, timeContinute: secondsToHms(currentTime) })
     }
 
     async function fetchingTimeContinute(){
-        const response = await axios.post('http://127.0.0.1:8000/anime/history/get', { userid: user.id, animeid: props.anime.id, espisode: props.episode})
+        const response = await axios.post(`${import.meta.env.VITE_URL_DOMAIN}/anime/history/get`, { userid: user.id, animeid: props.anime.id, espisode: props.episode})
         setTimeContinute(response.data.time)
         if(response.data.time>0 && showNoitification == false){
             setShowNotification(true)
@@ -72,8 +72,7 @@ export default function WatchingDetail(props) {
 
     const fetchVideo = async () => {
         try {
-            console.log(`http://127.0.0.1:8000/anime/video?animeid=${props.anime.id}&episode=${props.episode}`)
-            const response = await axios.get(`http://127.0.0.1:8000/anime/video?animeid=${props.anime.id}&episode=${props.episode}`)
+            const response = await axios.get(`${import.meta.env.VITE_URL_DOMAIN}/anime/video?animeid=${props.anime.id}&episode=${props.episode}`)
             console.log(response.data.videoUrl)
             setVideoUrl(response.data.videoUrl)
         } catch (error) {
@@ -82,7 +81,7 @@ export default function WatchingDetail(props) {
     };
 
     async function fetchRatingAnime() {
-        const response = await axios.get(`http://127.0.0.1:8000/interact/rating/statistic/${props.anime.id}`)
+        const response = await axios.get(`${import.meta.env.VITE_URL_DOMAIN}/interact/rating/statistic/${props.anime.id}`)
         setRatingStatistic(response.data)
     }
     const handleDate = (inputDate) => {

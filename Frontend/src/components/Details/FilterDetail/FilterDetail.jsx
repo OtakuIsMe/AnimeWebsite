@@ -12,7 +12,7 @@ export default function FilterDetail({ filter }) {
     }, [filter])
 
     async function fetchAnimeFilter() {
-        const response = await axios.get(`http://127.0.0.1:8000/anime/type?filter=${filter}`)
+        const response = await axios.get(`${import.meta.env.VITE_URL_DOMAIN}/anime/type?filter=${filter}`)
         setAnimes(response.data)
     }
 

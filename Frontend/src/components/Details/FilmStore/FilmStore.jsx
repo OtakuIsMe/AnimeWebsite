@@ -30,11 +30,11 @@ export default function FilmStore({ type }) {
     }, [user, type])
 
     async function fetchAnimeStore(userid) {
-        const response = await axios.get(`http://127.0.0.1:8000/anime/follow/${userid}`)
+        const response = await axios.get(`${import.meta.env.VITE_URL_DOMAIN}/anime/follow/${userid}`)
         setAnimes(response.data)
     }
     async function fetchAnimeHistory(userid){
-        const response = await axios.get(`http://127.0.0.1:8000/anime/history/${userid}`)
+        const response = await axios.get(`${import.meta.env.VITE_URL_DOMAIN}/anime/history/${userid}`)
         setAnimes(response.data)
         console.log(response.data)
     }

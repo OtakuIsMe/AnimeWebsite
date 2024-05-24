@@ -26,7 +26,7 @@ export default function SearchDetail(props) {
     async function fetchSearching() {
         if (q !== undefined && q !== '' && q !== null) {
             console.log(q)
-            const response = await axios.post('http://127.0.0.1:8000/anime/search', {
+            const response = await axios.post(`${import.meta.env.VITE_URL_DOMAIN}/anime/search`, {
                 key: q
             })
             setAnimes(response.data)

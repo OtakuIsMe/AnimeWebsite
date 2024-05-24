@@ -12,7 +12,7 @@ export default function AnimePage() {
 
     useEffect(() => {
         async function fetchAnimeData(animeName) {
-            const response = await axios.get(`http://127.0.0.1:8000/anime/name/${animeName}`)
+            const response = await axios.get(`${import.meta.env.VITE_URL_DOMAIN}/anime/name/${animeName}`)
             setData(response.data)
         }
         fetchAnimeData(animeName);

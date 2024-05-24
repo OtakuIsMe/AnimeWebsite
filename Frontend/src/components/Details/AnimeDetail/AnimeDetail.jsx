@@ -37,7 +37,7 @@ export default function AnimeDetail(props) {
     },[rating])
 
     async function fetchRatingAnime() {
-        const response = await axios.get(`http://127.0.0.1:8000/interact/rating/statistic/${props.anime.id}`)
+        const response = await axios.get(`${import.meta.env.VITE_URL_DOMAIN}/interact/rating/statistic/${props.anime.id}`)
         setRatingStatistic(response.data)
     }
 
