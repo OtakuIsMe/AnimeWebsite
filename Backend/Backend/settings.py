@@ -92,9 +92,11 @@ WSGI_APPLICATION = 'Backend.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.oracle',
-        'NAME': os.getenv('DB_NAME'),
-        'USER': os.getenv('DB_USER'),
-        'PASSWORD': os.getenv('DB_PASSWORD'),
+        'NAME': os.getenv('DB_SERVICE'),  
+        'USER': os.getenv('DB_USER'),     
+        'PASSWORD': os.getenv('DB_PASSWORD'), 
+        'HOST': os.getenv('DB_HOST'),    
+        'PORT': os.getenv('DB_PORT'),  
     }
 }
 
@@ -137,6 +139,7 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = [
     './photoStore',
 ]
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 

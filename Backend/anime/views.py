@@ -186,8 +186,7 @@ class add_anime_espisode_video(APIView):
                     blob.upload_from_filename(
                         file_path, content_type='video/mp2t' if file.endswith('.ts') else 'application/x-mpegURL')
 
-            videoUrl = f'https://storage.googleapis.com/animewebsite-2f080.appspot.com/{
-                blob_base_path}index.m3u8'
+            videoUrl = f'https://storage.googleapis.com/animewebsite-2f080.appspot.com/{blob_base_path}index.m3u8'
 
             anime = Anime.objects.get(pk=anime_id)
             animeEspisode = AnimeEspisode.objects.filter(

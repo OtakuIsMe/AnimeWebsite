@@ -5,10 +5,16 @@ services:
     image: container-registry.oracle.com/database/enterprise:21.3.0.0
     container_name: oracle-db
     ports:
-      - "1080:1521"
+      - "1081:1521"
     environment:
       - ORACLE_SID=ORCLCDB
       - ORACLE_PDB=ORCLPDB1
       - ORACLE_PWD=CuongDuy123
-      - ORACLE_CHARACTERSET=AL32UTF8
     restart: always
+    networks:
+      - orcl-db-network
+    expose:
+      - 1521
+networks:
+  orcl-db-network:
+    driver: bridge
