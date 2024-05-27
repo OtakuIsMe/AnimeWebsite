@@ -24,12 +24,12 @@ export default function Login() {
         setPassword(e.target.value)
     }
 
-    const checkLogin = async ()=>{
-        const response = await axios.post(`${import.meta.env.VITE_URL_DOMAIN}/users/login`, {email: email, password: password})
+    const checkLogin = async () => {
+        const response = await axios.post(`${import.meta.env.VITE_URL_DOMAIN}/users/login`, { email: email, password: password })
         setStatus(response.data.status)
-        if(response.data.status){
-            Cookies.set('token', response.data.token , { expires: 1, sameSite: 'None', secure: true });
-            navigate('/')
+        if (response.data.status) {
+            Cookies.set('token', response.data.token, { expires: 1, sameSite: 'None', secure: true });
+            window.location.href = '/'
         }
     }
 
@@ -66,13 +66,13 @@ export default function Login() {
                     </div>
                     <div className="forget-pass">FORGOT PASSWORD?</div>
 
-                    <div className="notification" style={status? {display: 'none'}:{}}>Wrong Email/Password</div>
+                    <div className="notification" style={status ? { display: 'none' } : {}}>Wrong Email/Password</div>
                 </div>
             </div>
             <div className="login-btn" onClick={checkLogin}>LOG IN</div>
             <div className="cr-acc">
-              <span className="no-acc">No account?</span>
-              <span className="cr-1">CREATE ONE</span>  
+                <span className="no-acc">No account?</span>
+                <span className="cr-1">CREATE ONE</span>
             </div>
         </div>
     )

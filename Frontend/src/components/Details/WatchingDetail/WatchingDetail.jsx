@@ -29,13 +29,17 @@ export default function WatchingDetail(props) {
     const { user } = useContext(AuthContext)
     useEffect(() => {
         if (props.anime.id) {
-            fetchRatingAnime();
             fetchVideo();
+            fetchRatingAnime();
+        }
+    }, [props.anime.id])
+    useEffect(() => {
+        if (props.anime.id && user) {
             setUserId(user.id)
             setAnimeId(props.anime.id)
             fetchingTimeContinute();
         }
-    }, [props.anime.id]);
+    }, [props.anime.id, user]);
 
     useEffect(() => {
         if (currentTime != 0)
@@ -49,10 +53,10 @@ export default function WatchingDetail(props) {
         await axios.post(`${import.meta.env.VITE_URL_DOMAIN}/anime/history/add`, { userid: userId, animeid: animeId, espisode: props.episode, timeContinute: secondsToHms(currentTime) })
     }
 
-    async function fetchingTimeContinute(){
-        const response = await axios.post(`${import.meta.env.VITE_URL_DOMAIN}/anime/history/get`, { userid: user.id, animeid: props.anime.id, espisode: props.episode})
+    async function fetchingTimeContinute() {
+        const response = await axios.post(`${import.meta.env.VITE_URL_DOMAIN}/anime/history/get`, { userid: user.id, animeid: props.anime.id, espisode: props.episode })
         setTimeContinute(response.data.time)
-        if(response.data.time>0 && showNoitification == false){
+        if (response.data.time > 0 && showNoitification == false) {
             setShowNotification(true)
         }
     }
@@ -114,12 +118,14 @@ export default function WatchingDetail(props) {
 
     const handleMoreLessChange = () => {
         setIsMoreLess(prev => !prev)
+        let progress = document.querySelector('#watching-detail .anime-content .detail')
+        progress.classList.toggle('more')
     }
     const handleProgress = (progress) => {
         setCurrentTime(progress.playedSeconds);
         console.log(progress.playedSeconds)
     };
-    const handleAgreeWatchContinute = ()=>{
+    const handleAgreeWatchContinute = () => {
         if (videoTime.current) {
             videoTime.current.seekTo(timeContinute);
             videoTime.current.getInternalPlayer().play();
@@ -127,7 +133,7 @@ export default function WatchingDetail(props) {
         console
         setShowNotification(false);
     }
-    const handleDisAgreeWatchContinute = ()=>{
+    const handleDisAgreeWatchContinute = () => {
         setShowNotification(false);
     }
     return (
@@ -185,21 +191,23 @@ export default function WatchingDetail(props) {
                     <div className="release-date">
                         <span>Released on {handleDate(getDateOfEpisode())}</span>
                     </div>
-                    <div className="description">
-                        <span>{props.anime.description}</span>
-                    </div>
-                    <div className="anime-types">
-                        {props.anime.types?.map((type, index) => {
-                            return (
-                                <div className="anime-type" key={index} style={{ cursor: "pointer" }}>
-                                    <span>{type.name}</span>
-                                </div>
-                            );
-                        })}
-                    </div>
-                    <div className="anime-audio">
-                        <span className="audio-key">Audio</span>
-                        <span className="audio-value">{props.anime.country}</span>
+                    <div className="detail">
+                        <div className="description">
+                            <span>{props.anime.description}</span>
+                        </div>
+                        <div className="anime-types">
+                            {props.anime.types?.map((type, index) => {
+                                return (
+                                    <div className="anime-type" key={index} style={{ cursor: "pointer" }}>
+                                        <span>{type.name}</span>
+                                    </div>
+                                );
+                            })}
+                        </div>
+                        <div className="anime-audio">
+                            <span className="audio-key">Audio</span>
+                            <span className="audio-value">{props.anime.country}</span>
+                        </div>
                     </div>
                     <div className="more-less-action" onClick={handleMoreLessChange}>{isMoreLess ? 'LESS DETAILS' : 'MORE DETAILS'}</div>
                 </div>

@@ -1,11 +1,10 @@
-
-#header{
+#header {
     height: 60px;
     width: 100%;
     position: fixed;
     display: flex;
     flex-direction: row;
-    background-color:  #23252b;
+    background-color: #23252b;
     z-index: 100;
 }
 
@@ -14,24 +13,24 @@
     margin-left: 120px;
 }
 
-.header-logo img{
+.header-logo img {
     height: 60px;
 }
 
-.header-menu{
-    display : flex;
+.header-menu {
+    display: flex;
     margin-left: 20px;
     cursor: pointer;
 }
 
-.anime-menu{
+.anime-menu {
     display: flex;
-    justify-content: center; 
-    align-items: center; 
+    justify-content: center;
+    align-items: center;
     width: 120px;
 }
 
-.header-menu div span{
+.header-menu div span {
     color: rgb(211, 211, 211);
 }
 
@@ -41,22 +40,25 @@
     margin-left: auto;
     margin-right: 100px;
 }
-.header-action .search, .header-action .user-action{
+
+.header-action .search,
+.header-action .user-action {
     display: flex;
-    justify-content: center; 
-    align-items: center; 
+    justify-content: center;
+    align-items: center;
     width: 60px;
 }
 
-.header-action .search svg{
+.header-action .search svg {
     color: white;
 }
 
 
-.anime-menu:hover{
+.anime-menu:hover {
     background-color: #141519;
 }
-.header-action div:hover{
+
+.header-action div:hover {
     background-color: #141519;
 }
 
@@ -70,6 +72,7 @@
     transition: max-height 0.2s ease;
     z-index: 2;
 }
+
 .anime-top-dropdown {
     width: 645px;
     background-color: #141519;
@@ -80,6 +83,7 @@
     transition: max-height 0.2s ease;
     z-index: 2;
 }
+
 .anime-season-dropdown {
     width: 862px;
     background-color: #141519;
@@ -92,15 +96,17 @@
 }
 
 .container {
-    width: 862px ;
+    width: 862px;
 }
-.row{
-    width: 100% ;
+
+.row {
+    width: 100%;
     height: 42px;
-    display: block ;
+    display: block;
 }
-.col{
-    width: 25% ;
+
+.col {
+    width: 25%;
     height: 42px;
     display: inline-block;
     align-items: center;
@@ -109,33 +115,35 @@
 .col span {
     position: absolute;
     transform: translateY(50%);
-    margin-left: 20px; /* Add left margin of 20px */
+    margin-left: 20px;
+    /* Add left margin of 20px */
 }
 
-.col:hover{
+.col:hover {
     background-color: #23252b;
 }
 
-#header .header-action .user-action img{
+#header .header-action .user-action img {
     height: 40px;
     width: 40px;
     border-radius: 50%;
+    object-fit: cover;
 }
 
-#header .user-action{
+#header .user-action {
     position: relative;
 }
 
-#header .user-action .user-action-dropdown{
+#header .user-action .user-action-dropdown {
     position: absolute;
     top: 100%;
     right: 0;
     width: 200px;
-    height: 260px;
     background-color: #141519;
     padding: 10px 0;
 }
-#header .user-action .user-action-dropdown .block{
+
+#header .user-action .user-action-dropdown .block {
     height: 60px;
     display: flex;
     justify-content: center;
@@ -144,7 +152,6 @@
     cursor: pointer;
 }
 
-#header .user-action .user-action-dropdown .block:hover{
+#header .user-action .user-action-dropdown .block:hover {
     background-color: #23252b;
 }
-

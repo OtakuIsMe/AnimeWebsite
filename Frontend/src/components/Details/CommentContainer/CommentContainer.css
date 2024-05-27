@@ -1,43 +1,51 @@
-#comment-container{
+#comment-container {
     width: 1120px;
     height: auto;
     margin-left: auto;
-    margin-right: auto ;
+    margin-right: auto;
     padding-bottom: 80px;
 }
-#comment-container span{
+
+#comment-container span {
     color: white;
 }
-#comment-container .taskbar{
+
+#comment-container .taskbar {
     height: 44px;
     padding-left: 15px;
     display: flex;
     position: relative;
     align-items: center;
 }
-#comment-container .review-total span{
+
+#comment-container .review-total span {
     margin-right: 15px;
 }
-#comment-container .review-total{
+
+#comment-container .review-total {
     width: auto;
     height: auto;
     display: flex;
     border-right: 1px solid #a0a0a0;
 }
-#comment-container .rating{
+
+#comment-container .rating {
     padding-left: 15px;
     display: flex;
     align-items: center;
 }
-#comment-container .rating svg{
+
+#comment-container .rating svg {
     color: #f47521;
 }
-#comment-container .filter{
-    position: absolute;  
+
+#comment-container .filter {
+    position: absolute;
     right: 0px;
     top: 0px;
 }
-#comment-container .filter-show{
+
+#comment-container .filter-show {
     display: flex;
     width: 80px;
     height: 44px;
@@ -46,15 +54,17 @@
     margin-left: auto;
     cursor: pointer;
 }
-#comment-container .filter .filter-show svg{
+
+#comment-container .filter .filter-show svg {
     color: #a0a0a0;
 }
-#comment-container .filter .filter-show span{
+
+#comment-container .filter .filter-show span {
     margin-left: 10px;
     color: #a0a0a0;
 }
 
-#comment-container .filter .filter-dropdown{
+#comment-container .filter .filter-dropdown {
     width: 200px;
     height: 306px;
     padding: 12px 0;
@@ -63,20 +73,21 @@
     z-index: 1;
 }
 
-#comment-container .filter .filter-dropdown .MuiRadio-icon{
-    color: #2abdbb 
+#comment-container .filter .filter-dropdown .MuiRadio-icon {
+    color: #2abdbb
 }
 
-#comment-container .filter .filter-dropdown .MuiRadio-radio{
+#comment-container .filter .filter-dropdown .MuiRadio-radio {
     background-color: #192e38;
     border: 2px solid #a0a0a0;
     cursor: pointer;
 }
 
-#comment-container .filter .filter-dropdown .MuiRadio-radio.Mui-checked{
+#comment-container .filter .filter-dropdown .MuiRadio-radio.Mui-checked {
     border: 2px solid #2abdbb;
 }
-#comment-container .filter .filter-dropdown .name.block{
+
+#comment-container .filter .filter-dropdown .name.block {
     width: 100%;
     height: 14.28%;
     padding-left: 15px;
@@ -84,53 +95,61 @@
     align-items: center;
 }
 
-#comment-container .filter .filter-dropdown .MuiBox-root{
+#comment-container .filter .filter-dropdown .MuiBox-root {
     width: 100%;
     height: 85.72%;
 }
 
-#comment-container .filter .filter-dropdown .MuiRadio-root{
+#comment-container .filter .filter-dropdown .MuiRadio-root {
     width: 100%;
     height: 16.66%;
     padding-left: 15px;
     display: flex;
     align-items: center;
 }
-#comment-container .filter .filter-dropdown .MuiRadio-root:hover{
+
+#comment-container .filter .filter-dropdown .MuiRadio-root:hover {
     background-color: #141519;
 }
-#comment-container .add-comment{
+
+#comment-container .add-comment {
     background-color: #141519;
     padding: 16px 20px 24px;
 }
-#comment-container .user-info-rating{
+
+#comment-container .user-info-rating {
     display: flex;
     align-items: center;
 }
-#comment-container .user-info-rating .user-avatar{
+
+#comment-container .user-info-rating .user-avatar {
     width: 62px;
     height: 62px;
     display: flex;
     justify-content: center;
 }
 
-#comment-container .user-info-rating .user-avatar img{
+#comment-container .user-info-rating .user-avatar img {
     width: 50px;
     height: 50px;
     border-radius: 50%;
+    object-fit: cover;
 }
-#comment-container .user-info-rating .name-rating{
+
+#comment-container .user-info-rating .name-rating {
     margin-left: 30px;
     display: grid;
     height: 100%;
 }
-#comment-container .user-info-rating .add-review{
+
+#comment-container .user-info-rating .add-review {
     margin-left: auto;
     display: flex;
     align-items: center;
     cursor: pointer;
 }
-#comment-container .user-info-rating .add-review .btn-add-review{
+
+#comment-container .user-info-rating .add-review .btn-add-review {
     background-color: #f47521;
     color: #141519;
     height: 40px;
@@ -140,39 +159,46 @@
     font-weight: 600;
 }
 
-#comment-container .user-info-rating .name-rating .user-name{
+#comment-container .user-info-rating .name-rating .user-name {
     font-size: 15px;
     margin-bottom: auto;
 }
-#comment-container .user-info-rating .name-rating .rating-box span{
+
+#comment-container .user-info-rating .name-rating .rating-box span {
     font-size: 25px;
 }
-#comment-container .user-info-rating .name-rating .rating-box{
+
+#comment-container .user-info-rating .name-rating .rating-box {
     margin-top: 15px;
 }
-#comment-container .comment-dropdown{
+
+
+
+#comment-container .comment-dropdown {
     margin-left: 92px;
     margin-top: 15px;
     display: grid;
 }
-#comment-container .comment-dropdown .action-button{
-    display:  flex;
+
+#comment-container .comment-dropdown .action-button {
+    display: flex;
 }
 
-#comment-container .comment-dropdown input{
+#comment-container .comment-dropdown input {
     background-color: #000000b3;
     border: .0625rem solid #59595b;
     color: #fff;
     margin-top: 15px;
 }
 
-#comment-container .comment-dropdown textarea{
+#comment-container .comment-dropdown textarea {
     background-color: #000000b3;
     border: .0625rem solid #59595b;
     color: #fff;
     margin-top: 15px;
 }
-#comment-container .comment-dropdown .note{
+
+#comment-container .comment-dropdown .note {
     margin-left: auto;
     font-size: 13px;
     color: #59595b;
@@ -180,25 +206,26 @@
     margin-top: 8px;
 }
 
-#comment-container .comment-dropdown .txt-tilte{
+#comment-container .comment-dropdown .txt-tilte {
     height: 42px;
     display: flex;
     padding-left: 10px;
 }
 
-#comment-container .comment-dropdown .txt-comment{
+#comment-container .comment-dropdown .txt-comment {
     height: 162px;
     padding-left: 10px;
     padding-top: 10px;
 }
 
-#comment-container .comment-dropdown .action-button{
+#comment-container .comment-dropdown .action-button {
     width: auto;
     margin-left: auto;
     margin-top: 20px;
 }
 
-#comment-container .comment-dropdown .btn-cancel, .btn-post{
+#comment-container .comment-dropdown .btn-cancel,
+.btn-post {
     width: 120px;
     height: 40px;
     display: flex;
@@ -207,78 +234,122 @@
     font-weight: 600;
 }
 
-#comment-container .comment-dropdown .btn-cancel{
+#comment-container .comment-dropdown .btn-cancel {
     border: 2px solid #f47521;
     color: #f47521;
     margin-right: 20px;
     cursor: pointer;
 }
-#comment-container .comment-dropdown .btn-cancel:hover{
+
+#comment-container .comment-dropdown .btn-cancel:hover {
     border: 2px solid #e08243;
     color: #e08243;
 }
 
-#comment-container .comment-dropdown .btn-post{
+#comment-container .comment-dropdown .btn-post {
     border: 2px solid #59595b;
     color: #59595b;
     cursor: pointer;
 }
-#comment-container .comment-dropdown .btn-post.post-allow{
+
+#comment-container .comment-dropdown .btn-post.post-allow {
     border: 2px solid #f47521;
     color: #23252b;
     background-color: #f47521;
 }
 
-#comment-container .comment-dropdown .btn-post.post-allow:hover{
+#comment-container .comment-dropdown .btn-post.post-allow:hover {
     border: 2px solid #e08243;
     background-color: #e08243;
 }
 
-#comment-container .comment{
+#comment-container .no-user {
+    width: 100%;
+    border: 1px dashed white;
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#comment-container .no-user p {
+    text-align: center;
+    width: 100%;
+    color: white;
+    font-weight: 600;
+    font-size: 24px;
+    margin: 0;
+}
+
+#comment-container .no-user .description {
+    color: #a0a0a0;
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+#comment-container .no-user .description .link {
+    color: #2abdbb;
+    text-decoration: none;
+    margin: 0 3px;
+}
+
+#comment-container .no-user .description .link:hover {
+    color: white;
+    text-decoration: underline;
+}
+
+#comment-container .comment {
     display: flex;
     height: auto;
     padding: 20px;
 }
-#comment-container .comment .user-avatar{
+
+#comment-container .comment .user-avatar {
     width: 60px;
     margin-right: 30px;
 }
 
-#comment-container .comment .user-avatar img{
+#comment-container .comment .user-avatar img {
     width: 50px;
     height: 50px;
     border-radius: 50%;
+    object-fit: cover;
 }
-#comment-container .comment .comment-detail .user-info{
+
+#comment-container .comment .comment-detail .user-info {
     margin-bottom: 20px;
 }
-#comment-container .comment .comment-detail .date-up{
+
+#comment-container .comment .comment-detail .date-up {
     padding-left: 20px;
     color: #a0a0a0;
 }
-#comment-container .comment .comment-detail .username{
+
+#comment-container .comment .comment-detail .username {
     font-size: 18px;
 }
-#comment-container .comment .comment-detail .user-rating span{
+
+#comment-container .comment .comment-detail .user-rating span {
     font-size: 20px;
 }
 
-#comment-container .comment .comment-detail .user-title{
+#comment-container .comment .comment-detail .user-title {
     font-size: 20px;
     color: white;
     font-weight: 600;
 }
 
-#comment-container .comment .comment-detail .user-comment{
+#comment-container .comment .comment-detail .user-comment {
     font-size: 17px;
     color: white;
 }
 
-#comment-container .btn-action{
+#comment-container .btn-action {
     display: flex;
     padding-left: 90px;
 }
-#comment-container .btn-action div{
+
+#comment-container .btn-action div {
     width: 130px;
     height: 40px;
     display: flex;
@@ -287,30 +358,15 @@
     font-weight: 600;
     cursor: pointer;
 }
-#comment-container .btn-action .btn-add-review{
+
+#comment-container .btn-action .btn-add-review {
     color: #141519;
     background-color: #f47521;
     border: 2px solid #f47521;
 }
 
-#comment-container .btn-action .btn-load-more{
+#comment-container .btn-action .btn-load-more {
     color: #f47521;
     border: 2px solid #f47521;
     margin-left: 10px;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

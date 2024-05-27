@@ -7,6 +7,9 @@ import { Container, Row, Col } from 'react-bootstrap';
 import axios from 'axios';
 import AuthContext from '../Context/AuthContext';
 import { useNavigate } from 'react-router-dom';
+import React from 'react';
+
+import userLogo from '../../photos/user.png'
 
 
 export default function Header() {
@@ -17,14 +20,14 @@ export default function Header() {
     const [isUserDropdown, setIsUserDropdown] = useState(false)
     const navigate = useNavigate()
 
-    const {user, logout} = useContext(AuthContext)
+    const { user, logout } = useContext(AuthContext)
 
     async function fetchType() {
         const response = await axios.get(`${import.meta.env.VITE_URL_DOMAIN}/anime/type/all`)
         setTypes(response.data)
     }
 
-    async function fetchSeason(){
+    async function fetchSeason() {
         const response = await axios.get(`${import.meta.env.VITE_URL_DOMAIN}/anime/season/lately`)
         setSeasons(response.data)
     }
@@ -50,12 +53,12 @@ export default function Header() {
     const typesChunks = chunkArray(types, 4); // Split types into chunks of 4
     const seasonsChunks = chunkArray(seasons, 4);
 
-    const handleLogoClick = ()=>{
+    const handleLogoClick = () => {
         navigate(`/`)
     }
 
-    const handleUserActionClick = ()=>{
-        setIsUserDropdown(prev =>!prev)
+    const handleUserActionClick = () => {
+        setIsUserDropdown(prev => !prev)
     }
     return (
         <div id="header">
@@ -70,7 +73,7 @@ export default function Header() {
                             {typesChunks.map((chunk, index) => (
                                 <Row key={index}>
                                     {chunk.map((type, i) => (
-                                        <Col key={i} onClick={()=>{navigate(`/anime/type?filter=${type.name}`)}}>
+                                        <Col key={i} onClick={() => { navigate(`/anime/type?filter=${type.name}`) }}>
                                             <span>{type.name}</span>
                                         </Col>
                                     ))}
@@ -82,17 +85,17 @@ export default function Header() {
                 <div className="anime-menu" style={selectedMenu === 'top' ? { backgroundColor: "#141519" } : {}} onClick={() => handleMenuClick('top')}>
                     <span>Top Anime</span>
                     <div className="anime-top-dropdown" style={selectedMenu === 'top' ? { maxHeight: '332px' } : { maxHeight: '0' }} >
-                            <Container>
-                                <Row>
-                                    <Col><span>Theo Ngày</span></Col>
-                                    <Col><span>Theo Tháng</span></Col>
-                                    <Col><span>Theo Năm</span></Col>
-                                </Row>
-                                <Row>
-                                    <Col><span>Theo Mùa</span></Col>
-                                    <Col><span>Yêu Thích</span></Col>
-                                </Row>
-                            </Container>
+                        <Container>
+                            <Row>
+                                <Col><span>Theo Ngày</span></Col>
+                                <Col><span>Theo Tháng</span></Col>
+                                <Col><span>Theo Năm</span></Col>
+                            </Row>
+                            <Row>
+                                <Col><span>Theo Mùa</span></Col>
+                                <Col><span>Yêu Thích</span></Col>
+                            </Row>
+                        </Container>
                     </div>
                 </div>
                 <div className="anime-menu" style={selectedMenu === 'season' ? { backgroundColor: "#141519" } : {}} onClick={() => handleMenuClick('season')}>
@@ -103,7 +106,7 @@ export default function Header() {
                                 <Row key={index}>
                                     {chunk.map((type, i) => (
                                         <Col key={i}>
-                                            <span>{type.seasonname + ' '+ type.year}</span>
+                                            <span>{type.seasonname + ' ' + type.year}</span>
                                         </Col>
                                     ))}
                                 </Row>
@@ -117,16 +120,24 @@ export default function Header() {
 
             </div>
             <div className="header-action">
-                <div className="search" onClick={()=>{navigate('/search')}}>
+                <div className="search" onClick={() => { navigate('/search') }}>
                     <SearchIcon />
                 </div>
-                <div className="user-action" onClick={handleUserActionClick} style={isUserDropdown? {backgroundColor:'#141519'}: {}}>
-                    <img src={user?.img.url} alt="" />
-                    <div className="user-action-dropdown" style={isUserDropdown? {}: {display:'none'}}>
-                        <div className="acc-info block" onClick={()=>{navigate(`/profile/manage`)}}>Account Info</div>
-                        <div className="film-store block" onClick={()=>{navigate(`/anime/store/watchlist`)}}>Watchlist</div>
-                        <div className="history block" onClick={()=>{navigate(`/anime/store/history`)}}>History</div>
-                        <div className="log-out block" onClick={logout}>Log Out</div>
+                <div className="user-action" onClick={handleUserActionClick} style={isUserDropdown ? { backgroundColor: '#141519' } : {}}>
+                    <img src={user ? user.img.url : userLogo} alt="" />
+                    <div className="user-action-dropdown" style={isUserDropdown ? {} : { display: 'none' }}>
+                        {user ? (
+                            <React.Fragment>
+                                <div className="acc-info block" onClick={() => { navigate(`/profile/manage`) }}>Account Info</div>
+                                <div className="film-store block" onClick={() => { navigate(`/anime/store/watchlist`) }}>Watchlist</div>
+                                <div className="history block" onClick={() => { navigate(`/anime/store/history`) }}>History</div>
+                                <div className="log-out block" onClick={logout}>Log Out</div>
+                            </React.Fragment>) : (
+                            <React.Fragment>
+                                <div className="cr-acc block">Create Account</div>
+                                <div className="log-in block" onClick={() => { navigate(`/login`) }}>Log In</div>
+                            </React.Fragment>
+                        )}
                     </div>
                 </div>
             </div>

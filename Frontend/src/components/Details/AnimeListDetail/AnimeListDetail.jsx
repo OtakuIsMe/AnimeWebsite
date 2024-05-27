@@ -2,9 +2,11 @@ import React, { useEffect, useState } from "react";
 import './AnimeListDetail.css'
 import { MdChevronLeft, MdChevronRight } from "react-icons/md";
 import { TiStarFullOutline } from "react-icons/ti";
+import { useNavigate } from "react-router-dom";
 
 export default function AnimeListDetail(props) {
     const [title, setTitle] = useState('')
+    const navigate = useNavigate()
     useEffect(() => {
         setTitleForAnimeList()
     }, [])
@@ -26,6 +28,13 @@ export default function AnimeListDetail(props) {
         var slider = document.getElementById("slider");
         slider.scrollLeft = slider.scrollLeft + 1860;
     }
+    const hanldSliderCardClick = (name) =>{
+        if (name) {
+            let lowerCaseString = name.toLowerCase();
+            let hyphenatedString = lowerCaseString.replace(/\s+/g, '-');
+            navigate(`/anime/${hyphenatedString}`)
+        }
+    }
     return (
         <div id="anime-list-detail">
             <div className="anime-list-title">
@@ -38,7 +47,7 @@ export default function AnimeListDetail(props) {
                 <div id="slider">
                     {props.list.map((anime, index) => {
                         return (
-                            <div id='slider-card'>
+                            <div id='slider-card' style={{cursor: 'pointer'}} onClick={()=>{hanldSliderCardClick(anime.name)}} key = {index}>
                                 <div className="slider-card-hidden" style={{ backgroundImage: `linear-gradient(rgba(34, 34, 34, 0.9), rgba(34, 34, 34, 0.9)) ,url(${anime.images.avatar})` }}>
                                     <p className="slider-name-hidden">{anime.name}</p>
                                     <div className="slider-rating-hidden">

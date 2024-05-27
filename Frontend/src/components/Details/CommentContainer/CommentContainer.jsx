@@ -23,7 +23,7 @@ export default function CommentContainer(props) {
         comments: false
     })
 
-    const {user} = useContext(AuthContext)
+    const { user } = useContext(AuthContext)
     const [comments, setComments] = useState([])
 
     const handleChange = (event) => {
@@ -35,7 +35,7 @@ export default function CommentContainer(props) {
             fetchRatingAnime();
         }
     }, [props.animeid]);
-    useEffect(()=>{},[user])
+    useEffect(() => { }, [user])
     useEffect(() => {
         if (isEnough.comments && isEnough.title) {
             handlePostButton(true)
@@ -104,12 +104,16 @@ export default function CommentContainer(props) {
     }
 
     function handlePostButton(isAllow) {
-        if (isAllow) {
-            let progress1 = document.querySelector('.btn-post');
-            progress1.classList.add('post-allow');
-        } else {
-            let progress2 = document.querySelector('.btn-post');
-            progress2.classList.remove('post-allow');
+        try {
+            if (isAllow) {
+                let progress1 = document.querySelector('.btn-post');
+                progress1.classList.add('post-allow');
+            } else {
+                let progress2 = document.querySelector('.btn-post');
+                progress2.classList.remove('post-allow');
+            }
+        } catch (error) {
+
         }
     }
 
@@ -193,47 +197,60 @@ export default function CommentContainer(props) {
                     </div>
                 </div>
             </div>
-            <div className="add-comment">
-                <div className="user-info-rating">
-                    <div className="user-avatar">
-                        <img src={user?.img.url} alt="" />
-                    </div>
-                    <div className="name-rating">
-                        <span className="user-name">
-                            Review as {user?.username}
-                        </span>
-                        <Box
-                            sx={{
-                                '& > legend': { mt: 2 },
-                            }}
-                            className="rating-box"
-                        >
-                            <Rating
-                                name="simple-controlled"
-                                value={rating}
-                                onChange={(event, newValue) => {
-                                    setRatingValue(newValue);
+            {user ? (
+                <div className="add-comment">
+                    <div className="user-info-rating">
+                        <div className="user-avatar">
+                            <img src={user?.img.url} alt="" />
+                        </div>
+                        <div className="name-rating">
+                            <span className="user-name">
+                                Review as {user?.username}
+                            </span>
+                            <Box
+                                sx={{
+                                    '& > legend': { mt: 2 },
                                 }}
-                            />
-                        </Box>
+                                className="rating-box"
+                            >
+                                <Rating
+                                    name="simple-controlled"
+                                    value={rating}
+                                    onChange={(event, newValue) => {
+                                        setRatingValue(newValue);
+                                    }}
+                                />
+                            </Box>
+                        </div>
+                        <div className="add-review" style={isOpenComment ? { display: 'none' } : {}} onClick={() => { setIsOpenComment(true) }}>
+                            <div className="btn-add-review">
+                                ADD A REVIEW
+                            </div>
+                        </div>
                     </div>
-                    <div className="add-review" style={isOpenComment ? { display: 'none' } : {}} onClick={() => { setIsOpenComment(true) }}>
-                        <div className="btn-add-review">
-                            ADD A REVIEW
+                    <div className="comment-dropdown" style={isOpenComment ? {} : { display: 'none' }}>
+                        <input className="txt-tilte" type="text" value={inputTitle} onChange={handleTitleChange} placeholder="Add a Title" />
+                        <span className="note">10 character minimum</span>
+                        <textarea className="txt-comment" value={inputComment} onChange={handleCommentChange} placeholder="Write a Review" />
+                        <span className="note">100 character minimum</span>
+                        <div className="action-button">
+                            <div className="btn-cancel" onClick={() => { setIsOpenComment(false) }}>CANCEL</div>
+                            <div className="btn-post">POST</div>
                         </div>
                     </div>
                 </div>
-                <div className="comment-dropdown" style={isOpenComment ? {} : { display: 'none' }}>
-                    <input className="txt-tilte" type="text" value={inputTitle} onChange={handleTitleChange} placeholder="Add a Title" />
-                    <span className="note">10 character minimum</span>
-                    <textarea className="txt-comment" value={inputComment} onChange={handleCommentChange} placeholder="Write a Review" />
-                    <span className="note">100 character minimum</span>
-                    <div className="action-button">
-                        <div className="btn-cancel" onClick={() => { setIsOpenComment(false) }}>CANCEL</div>
-                        <div className="btn-post">POST</div>
+            ) : (
+                <div className="no-user">
+                    <p className="title">Account Required</p>
+                    <div className="description">
+                        Please
+                        <a href="/login" className="link">Log In</a>
+                        or
+                        <a href="/" className="link">Create Account</a>
+                        to add a review
                     </div>
                 </div>
-            </div>
+            )}
             <div className="comments">
                 {comments.map((comment, key) => {
                     return (
@@ -260,7 +277,7 @@ export default function CommentContainer(props) {
                                     {comment.message}
                                 </div>
                                 <div className="show-more-less-detail">
-                                    
+
                                 </div>
                             </div>
                         </div>

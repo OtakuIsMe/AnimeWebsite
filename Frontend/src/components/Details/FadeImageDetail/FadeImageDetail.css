@@ -1,11 +1,10 @@
-
 #Fade-image-detail {
     position: relative;
     background-color: black;
     z-index: 1;
 }
 
-.image-container{
+.image-container {
     height: 950px;
     display: flex;
     background-size: cover;
@@ -18,62 +17,75 @@
     left: 0px;
 }
 
-#Fade-image-detail .anime-name{
+#Fade-image-detail .anime-name {
     position: relative;
     left: 50px;
     top: 10%;
 }
 
-#Fade-image-detail .anime-name img{
+#Fade-image-detail .anime-name img {
     max-width: 400px;
 }
-#Fade-image-detail .anime-detail{
+
+#Fade-image-detail .anime-detail {
     position: relative;
     left: 50px;
     top: 20%;
 }
-#Fade-image-detail .anime-detail span{
+
+#Fade-image-detail .anime-detail span {
     color: #a0a0a0;
     font-size: 15px;
 }
-#Fade-image-detail .anime-detail svg{
+
+#Fade-image-detail .anime-detail svg {
     color: #a0a0a0;
     font-size: 12px;
 }
-#Fade-image-detail .anime-description{
+
+#Fade-image-detail .anime-description {
     position: relative;
     left: 50px;
     top: 25%;
     width: 540px;
     text-align: justify;
 }
-.anime-description span{
+
+.anime-description span {
     color: white;
     font-size: 15px;
 }
-#Fade-image-detail .btn-action{
+
+#Fade-image-detail .btn-action {
     height: 40px;
     position: relative;
     left: 50px;
     top: 30%;
 }
-.btn-watching{
+
+.btn-watching {
     display: inline-flex;
     background-color: #f47521;
     height: 40px;
     width: 222px;
     align-items: center;
-    justify-content : center;
+    justify-content: center;
     cursor: pointer;
 }
-.btn-watching:hover{
+
+.btn-watching:hover {
     background-color: #c25710;
 }
-.btn-watching svg{
+
+.btn-watching svg {
     font-size: 20px;
 }
 
-.btn-add-watchlist{
+.btn-watching span {
+    font-weight: 600;
+}
+
+.btn-add-watchlist {
     display: inline-flex;
     margin-left: 30px;
     height: 36px;
@@ -83,10 +95,16 @@
     justify-content: center;
     cursor: pointer;
 }
-.btn-add-watchlist img{
+
+.btn-add-watchlist img {
     width: 24px;
     height: 24px;
     filter: invert(55%) sepia(84%) saturate(2683%) hue-rotate(349deg) brightness(101%) contrast(92%);
 }
 
-
+#Fade-image-detail .progressing {
+    height: 950px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

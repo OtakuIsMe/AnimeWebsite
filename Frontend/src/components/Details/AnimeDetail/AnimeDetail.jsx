@@ -16,14 +16,16 @@ import axios from "axios";
 
 import CommentContainer from "../CommentContainer/CommentContainer";
 import RatingContext from "../../Context/RatingContext";
+import { useNavigate } from "react-router-dom";
 
 export default function AnimeDetail(props) {
-    const {rating, setRatingValue} = useContext(RatingContext)
+    const { rating, setRatingValue } = useContext(RatingContext)
     const [isMoreLess, setIsMoreLess] = useState(true)
     const [isOpenFilter, setIsOpenFilter] = useState(false)
     const [isOldestNewest, setIsOldestNewest] = useState(true)
     const [ratingStatistic, setRatingStatistic] = useState([])
     const [isOpenRating, setIsOpenRating] = useState(false)
+    const navigate = useNavigate()
 
     useEffect(() => {
         if (props.anime.id) {
@@ -31,10 +33,10 @@ export default function AnimeDetail(props) {
         }
     }, [props.anime.id]);
 
-    useEffect(()=>{
+    useEffect(() => {
         handleChangeValueForRating()
         fetchRatingAnime()
-    },[rating])
+    }, [rating])
 
     async function fetchRatingAnime() {
         const response = await axios.get(`${import.meta.env.VITE_URL_DOMAIN}/interact/rating/statistic/${props.anime.id}`)
@@ -70,10 +72,10 @@ export default function AnimeDetail(props) {
     }
 
     function handleChangeValueForRating() {
-        try{
+        try {
             let progress = document.querySelector('.select');
             progress.classList.toggle('select')
-        }catch(e){
+        } catch (e) {
 
         }
         switch (rating) {
@@ -104,6 +106,13 @@ export default function AnimeDetail(props) {
         setIsOpenRating(prev => !prev)
     }
 
+    const handlebtnwatchingclick = (name, espisode) => {
+        if (name && espisode) {
+            let lowerCaseString = name.toLowerCase();
+            let hyphenatedString = lowerCaseString.replace(/\s+/g, '-');
+            navigate(`/watch/${hyphenatedString}?episode=${espisode}`)
+        }
+    }
 
     return (
         <div id="anime-detail-container">
@@ -151,32 +160,32 @@ export default function AnimeDetail(props) {
                                         <div className="star5 rating-progress" >
                                             <FaStar />
                                             <span >5</span>
-                                            <ProgressBar now={ratingStatistic.Stars5/ratingStatistic.All*100} />
-                                            <span >{ratingStatistic.Stars5/ratingStatistic.All*100}%</span>
+                                            <ProgressBar now={ratingStatistic.Stars5 / ratingStatistic.All * 100} />
+                                            <span >{ratingStatistic.Stars5 / ratingStatistic.All * 100}%</span>
                                         </div>
                                         <div className="star4 rating-progress">
                                             <FaStar />
                                             <span>4</span>
-                                            <ProgressBar now={ratingStatistic.Stars4/ratingStatistic.All*100} />
-                                            <span>{ratingStatistic.Stars4/ratingStatistic.All*100}%</span>
+                                            <ProgressBar now={ratingStatistic.Stars4 / ratingStatistic.All * 100} />
+                                            <span>{ratingStatistic.Stars4 / ratingStatistic.All * 100}%</span>
                                         </div>
                                         <div className="star3 rating-progress">
                                             <FaStar />
                                             <span>3</span>
-                                            <ProgressBar now={ratingStatistic.Stars3/ratingStatistic.All*100} />
-                                            <span>{ratingStatistic.Stars3/ratingStatistic.All*100}%</span>
+                                            <ProgressBar now={ratingStatistic.Stars3 / ratingStatistic.All * 100} />
+                                            <span>{ratingStatistic.Stars3 / ratingStatistic.All * 100}%</span>
                                         </div>
                                         <div className="star2 rating-progress">
                                             <FaStar />
                                             <span>2</span>
-                                            <ProgressBar now={ratingStatistic.Stars2/ratingStatistic.All*100} />
-                                            <span>{ratingStatistic.Stars2/ratingStatistic.All*100}%</span>
+                                            <ProgressBar now={ratingStatistic.Stars2 / ratingStatistic.All * 100} />
+                                            <span>{ratingStatistic.Stars2 / ratingStatistic.All * 100}%</span>
                                         </div>
                                         <div className="star1 rating-progress">
                                             <FaStar />
                                             <span>1</span>
-                                            <ProgressBar now={ratingStatistic.Star1/ratingStatistic.All*100} />
-                                            <span>{ratingStatistic.Star1/ratingStatistic.All*100}%</span>
+                                            <ProgressBar now={ratingStatistic.Star1 / ratingStatistic.All * 100} />
+                                            <span>{ratingStatistic.Star1 / ratingStatistic.All * 100}%</span>
                                         </div>
                                     </div>
                                 </div>
@@ -223,7 +232,7 @@ export default function AnimeDetail(props) {
                                 }
                             })}
                         </div>
-                        <div className="btn-watch">
+                        <div className="btn-watch" onClick={() => { handlebtnwatchingclick(props.anime.name, 1) }}>
                             <CiPlay1 />
                             <span>START WATCHING S{props.anime.season} E1</span>
                         </div>
@@ -269,7 +278,7 @@ export default function AnimeDetail(props) {
                                                     <span>{handleDate(img.dateUp)}</span>
                                                 </div>
                                                 <p className="anime-description">{props.anime.description}</p>
-                                                <div className="btn-play">
+                                                <div className="btn-play" onClick={() => { handlebtnwatchingclick(props.anime.name, img.espisode) }}>
                                                     <CiPlay1 />
                                                     <span className="anime-season-espisode-play">PLAY S{props.anime.season} E{img.espisode}</span>
                                                 </div>
